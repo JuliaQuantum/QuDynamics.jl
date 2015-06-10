@@ -1,3 +1,4 @@
+using QuBase
 using QuDynamics
 using Base.Test
 

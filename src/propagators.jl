@@ -81,7 +81,7 @@ immutable QuKrylov <: QuPropagatorMethod
     options::Dict
 end
 
-QuKrylov() = QuKrylov(Dict([:NC=>10]))
+QuKrylov() = QuKrylov(@compat Dict(:NC=>10))
 
 @doc """
 Propagates to the next time state
@@ -108,13 +108,13 @@ function propagate(prob::QuKrylov, op, t, current_t, current_qustate)
     basis_size = get(prob.options,:NC, length(current_qustate))
     N = min(basis_size, length(current_qustate))
     v = Array(typeof(current_qustate),0)
-    sizehint(v, N+1)
+    @compat sizehint!(v, N+1)
     push!(v,zeros(current_qustate))
     push!(v,current_qustate)
     alpha = Array(Complex{Float64},0)
-    sizehint(alpha, N)
+    @compat sizehint!(alpha, N)
     beta = Array(Complex{Float64},0)
-    sizehint(beta, N+1)
+    @compat sizehint!(beta, N+1)
     push!(beta,0.)
     for i=2:N
         w = op*v[i]
