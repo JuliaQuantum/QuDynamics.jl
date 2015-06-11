@@ -1,5 +1,6 @@
 module QuDynamics
     using QuBase
-    using Docile
+    using Compat
+    VERSION < v"0.4-" && using Docile
     include("propagators.jl")
 end

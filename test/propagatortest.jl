@@ -5,7 +5,7 @@ hamiltonian = sigmax
 # Initial State
 init_state = normalize!(QuArray([0.5+0.1im, 0.2+0.2im]))
 # Time step
-tlist = [0.:0.1:2*pi]
+tlist = 0.:0.1:2*pi
 
 # Propagator using Euler method for solving the equation.
 qu_euler = QuPropagator(hamiltonian, init_state, tlist, QuEuler())
