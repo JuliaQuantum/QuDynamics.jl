@@ -12,7 +12,7 @@ Step Propagation using the Crank Nicolson formula.
 
 
 *source:*
-[QuDynamics.jl/src/propagators.jl:69](https://github.com/amitjamadagni/QuDynamics.jl/tree/f64239b5b2cf1ccc8c8877e1dd91a7b95add9a09/src/propagators.jl#L69)
+[QuDynamics.jl/src/propstepsolvers.jl:13](https://github.com/amitjamadagni/QuDynamics.jl/tree/397db1517f7e9a0327a44f2f545f6bd1782a6cdb/src/propstepsolvers.jl#L13)
 
 ---
 
@@ -24,7 +24,7 @@ Step Propagation using the Euler formula.
 
 
 *source:*
-[QuDynamics.jl/src/propagators.jl:61](https://github.com/amitjamadagni/QuDynamics.jl/tree/f64239b5b2cf1ccc8c8877e1dd91a7b95add9a09/src/propagators.jl#L61)
+[QuDynamics.jl/src/propstepsolvers.jl:5](https://github.com/amitjamadagni/QuDynamics.jl/tree/397db1517f7e9a0327a44f2f545f6bd1782a6cdb/src/propstepsolvers.jl#L5)
 
 ---
 
@@ -41,7 +41,52 @@ Step Propagation using the Krylov subspace iterations.
 
 
 *source:*
-[QuDynamics.jl/src/propagators.jl:82](https://github.com/amitjamadagni/QuDynamics.jl/tree/f64239b5b2cf1ccc8c8877e1dd91a7b95add9a09/src/propagators.jl#L82)
+[QuDynamics.jl/src/propstepsolvers.jl:26](https://github.com/amitjamadagni/QuDynamics.jl/tree/397db1517f7e9a0327a44f2f545f6bd1782a6cdb/src/propstepsolvers.jl#L26)
+
+---
+
+<a id="type__quode23s.1" class="lexicon_definition"></a>
+#### QuODE23s [¶](#type__quode23s.1)
+ODE Methods types
+Input Parameters :
+`options` : Dictionary to set the relative tolerance and absolute tolerance by using
+            keys as `:reltol` and `:abstol`.
+
+Step Propagation using the above implementation from `ODE.jl`.
+
+
+*source:*
+[QuDynamics.jl/src/propodesolvers.jl:14](https://github.com/amitjamadagni/QuDynamics.jl/tree/397db1517f7e9a0327a44f2f545f6bd1782a6cdb/src/propodesolvers.jl#L14)
+
+---
+
+<a id="type__quode45.1" class="lexicon_definition"></a>
+#### QuODE45 [¶](#type__quode45.1)
+ODE Methods types
+Input Parameters :
+`options` : Dictionary to set the relative tolerance and absolute tolerance by using
+            keys as `:reltol` and `:abstol`.
+
+Step Propagation using the above implementation from `ODE.jl`.
+
+
+*source:*
+[QuDynamics.jl/src/propodesolvers.jl:14](https://github.com/amitjamadagni/QuDynamics.jl/tree/397db1517f7e9a0327a44f2f545f6bd1782a6cdb/src/propodesolvers.jl#L14)
+
+---
+
+<a id="type__quode78.1" class="lexicon_definition"></a>
+#### QuODE78 [¶](#type__quode78.1)
+ODE Methods types
+Input Parameters :
+`options` : Dictionary to set the relative tolerance and absolute tolerance by using
+            keys as `:reltol` and `:abstol`.
+
+Step Propagation using the above implementation from `ODE.jl`.
+
+
+*source:*
+[QuDynamics.jl/src/propodesolvers.jl:14](https://github.com/amitjamadagni/QuDynamics.jl/tree/397db1517f7e9a0327a44f2f545f6bd1782a6cdb/src/propodesolvers.jl#L14)
 
 ## Internal
 
@@ -55,7 +100,7 @@ Returns true if the current state is final state, else false
 
 
 *source:*
-[QuDynamics.jl/src/propagators.jl:54](https://github.com/amitjamadagni/QuDynamics.jl/tree/f64239b5b2cf1ccc8c8877e1dd91a7b95add9a09/src/propagators.jl#L54)
+[QuDynamics.jl/src/propmachinery.jl:51](https://github.com/amitjamadagni/QuDynamics.jl/tree/397db1517f7e9a0327a44f2f545f6bd1782a6cdb/src/propmachinery.jl#L51)
 
 ---
 
@@ -68,7 +113,7 @@ Returns the next state by dispatching to particular
 
 
 *source:*
-[QuDynamics.jl/src/propagators.jl:40](https://github.com/amitjamadagni/QuDynamics.jl/tree/f64239b5b2cf1ccc8c8877e1dd91a7b95add9a09/src/propagators.jl#L40)
+[QuDynamics.jl/src/propmachinery.jl:37](https://github.com/amitjamadagni/QuDynamics.jl/tree/397db1517f7e9a0327a44f2f545f6bd1782a6cdb/src/propmachinery.jl#L37)
 
 ---
 
@@ -84,7 +129,7 @@ Input Parameters:
 
 
 *source:*
-[QuDynamics.jl/src/propagators.jl:97](https://github.com/amitjamadagni/QuDynamics.jl/tree/f64239b5b2cf1ccc8c8877e1dd91a7b95add9a09/src/propagators.jl#L97)
+[QuDynamics.jl/src/propstepsolvers.jl:41](https://github.com/amitjamadagni/QuDynamics.jl/tree/397db1517f7e9a0327a44f2f545f6bd1782a6cdb/src/propstepsolvers.jl#L41)
 
 ---
 
@@ -96,4 +141,4 @@ Returns the starting iterator state of the propagator method, i.e., the initial 
 
 
 *source:*
-[QuDynamics.jl/src/propagators.jl:28](https://github.com/amitjamadagni/QuDynamics.jl/tree/f64239b5b2cf1ccc8c8877e1dd91a7b95add9a09/src/propagators.jl#L28)
+[QuDynamics.jl/src/propmachinery.jl:25](https://github.com/amitjamadagni/QuDynamics.jl/tree/397db1517f7e9a0327a44f2f545f6bd1782a6cdb/src/propmachinery.jl#L25)

@@ -13,6 +13,12 @@
 
 [QuKrylov](QuDynamics.md#type__qukrylov.1)  Krylov subspace Method
 
+[QuODE23s](QuDynamics.md#type__quode23s.1)  ODE Methods types
+
+[QuODE45](QuDynamics.md#type__quode45.1)  ODE Methods types
+
+[QuODE78](QuDynamics.md#type__quode78.1)  ODE Methods types
+
 ---
 
 ## Methods [Internal]
