@@ -14,19 +14,18 @@ Step Propagation using the Crank Nicolson formula.
 *source:*
 [QuDynamics.jl/src/propstepsolvers.jl:13](https://github.com/amitjamadagni/QuDynamics.jl/tree/0db91ec4b0d16cbf3bb07ea07d1d5f3db6a1fce8/src/propstepsolvers.jl#L13)
 
----
 
 <a id="type__queuler.1" class="lexicon_definition"></a>
 #### QuEuler [¶](#type__queuler.1)
 Euler Method
 
 Step Propagation using the Euler formula.
+$ket{psi(t_{k+1})} = (mathbb{I}-iHartriangle{t})ket{psi(t_{k})}$
 
 
 *source:*
 [QuDynamics.jl/src/propstepsolvers.jl:5](https://github.com/amitjamadagni/QuDynamics.jl/tree/0db91ec4b0d16cbf3bb07ea07d1d5f3db6a1fce8/src/propstepsolvers.jl#L5)
 
----
 
 <a id="type__qukrylov.1" class="lexicon_definition"></a>
 #### QuKrylov [¶](#type__qukrylov.1)
@@ -43,7 +42,6 @@ Step Propagation using the Krylov subspace iterations.
 *source:*
 [QuDynamics.jl/src/propstepsolvers.jl:26](https://github.com/amitjamadagni/QuDynamics.jl/tree/0db91ec4b0d16cbf3bb07ea07d1d5f3db6a1fce8/src/propstepsolvers.jl#L26)
 
----
 
 <a id="type__quode23s.1" class="lexicon_definition"></a>
 #### QuODE23s [¶](#type__quode23s.1)
@@ -90,7 +88,6 @@ Step Propagation using the ode78 implementation from `ODE.jl`.
 
 ## Internal
 
----
 
 <a id="method__done.1" class="lexicon_definition"></a>
 #### done(prob::QuPropagator{QPM<:QuPropagatorMethod}, qustate::QuPropagatorState) [¶](#method__done.1)
@@ -102,7 +99,6 @@ Returns true if the current state is final state, else false
 *source:*
 [QuDynamics.jl/src/propmachinery.jl:51](https://github.com/amitjamadagni/QuDynamics.jl/tree/0db91ec4b0d16cbf3bb07ea07d1d5f3db6a1fce8/src/propmachinery.jl#L51)
 
----
 
 <a id="method__next.1" class="lexicon_definition"></a>
 #### next{QPM<:QuPropagatorMethod}(prob::QuPropagator{QPM<:QuPropagatorMethod}, qustate::QuPropagatorState) [¶](#method__next.1)
@@ -115,7 +111,6 @@ Returns the next state by dispatching to particular
 *source:*
 [QuDynamics.jl/src/propmachinery.jl:37](https://github.com/amitjamadagni/QuDynamics.jl/tree/0db91ec4b0d16cbf3bb07ea07d1d5f3db6a1fce8/src/propmachinery.jl#L37)
 
----
 
 <a id="method__propagate.1" class="lexicon_definition"></a>
 #### propagate(prob::QuEuler, op, t, current_t, current_qustate) [¶](#method__propagate.1)
@@ -131,7 +126,6 @@ Input Parameters:
 *source:*
 [QuDynamics.jl/src/propstepsolvers.jl:41](https://github.com/amitjamadagni/QuDynamics.jl/tree/0db91ec4b0d16cbf3bb07ea07d1d5f3db6a1fce8/src/propstepsolvers.jl#L41)
 
----
 
 <a id="method__start.1" class="lexicon_definition"></a>
 #### start(prob::QuPropagator{QPM<:QuPropagatorMethod}) [¶](#method__start.1)

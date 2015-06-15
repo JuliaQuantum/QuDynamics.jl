@@ -2,6 +2,7 @@
 Euler Method
 
 Step Propagation using the Euler formula.
+\$ket{\psi(t_{k+1})} = (\mathbb{I}-iH\vartriangle{t})\ket{\psi(t_{k})}\$
 """ ->
 immutable QuEuler <: QuPropagatorMethod
 end
