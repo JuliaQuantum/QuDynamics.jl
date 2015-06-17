@@ -3,14 +3,15 @@ abstract QuODESolvers <: QuPropagatorMethod
 const type_to_method = @compat Dict{Any, Any}(:QuODE45 => ODE.ode45, :QuODE78 => ODE.ode78, :QuODE23s => ODE.ode23s)
 
 for op in keys(type_to_method)
+    text = type_to_method[op]
     @eval  begin
         @doc """
-        ODE Methods types
+        ODE Method type $($(op))
         Input Parameters :
         `options` : Dictionary to set the relative tolerance and absolute tolerance by using
                     keys as `:reltol` and `:abstol`.
 
-        Step Propagation using the above implementation from `ODE.jl`.
+        Step Propagation using the $($(text)) implementation from `ODE.jl`.
         """ ->
         immutable $op <: QuODESolvers
             options::Dict{Symbol, Any}
