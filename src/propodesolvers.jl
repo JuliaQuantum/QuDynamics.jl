@@ -1,9 +1,9 @@
 abstract QuODESolvers <: QuPropagatorMethod
 
-const type_to_method = @compat Dict{Any, Any}(:QuODE45 => ODE.ode45, :QuODE78 => ODE.ode78, :QuODE23s => ODE.ode23s)
+const type_to_method_ode = @compat Dict{Any, Any}(:QuODE45 => ODE.ode45, :QuODE78 => ODE.ode78, :QuODE23s => ODE.ode23s)
 
-for op in keys(type_to_method)
-    text = type_to_method[op]
+for op in keys(type_to_method_ode)
+    text = type_to_method_ode[op]
     @eval  begin
         @doc """
         ODE Method type $($(op))
@@ -20,7 +20,7 @@ for op in keys(type_to_method)
     end
 end
 
-for (key,value) in type_to_method
+for (key,value) in type_to_method_ode
     @eval  begin
         function propagate(prob::$key, op, t, current_t, current_qustate)
             next_state = $value((t,y)-> -im*coeffs(op)*y, coeffs(current_qustate), [current_t, t], points=:specified,
