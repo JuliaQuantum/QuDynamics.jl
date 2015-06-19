@@ -27,12 +27,20 @@ start_state_qode78 = start(quode78)
 quode23s = QuPropagator(hamiltonian, init_state, tlist, QuODE23s())
 start_state_qode23s = start(quode23s)
 
+# Propagator using Exponential method for solving the equation.
+quexpm_expo  = QuPropagator(sigmax, init_state, tlist, QuExpm_Expo())
+start_state_quexpm_expo = start(quexpm_expo)
+quexpm_expmv  = QuPropagator(sigmax, init_state, tlist, QuExpm_ExpmV())
+start_state_quexpm_expmv = start(quexpm_expmv)
+
 next_state_euler = next(qu_euler, start_state_euler)
 next_state_cn = next(qu_cn, start_state_cn)
 next_state_krylov = next(qu_krylov, start_state_krylov)
 next_state_ode45 = next(quode45, start_state_qode45)
 next_state_ode78 = next(quode78, start_state_qode78)
 next_state_ode23s = next(quode23s, start_state_qode23s)
+next_state_expm_expo = next(quexpm_expo, start_state_quexpm_expo)
+next_state_expm_expmv = next(quexpm_expmv, start_state_quexpm_expmv)
 next_state_actual = expm(-im*sigmax*0.1)*init_state
 
 @test_approx_eq_eps coeffs(next_state_euler[1][2]) coeffs(next_state_actual) 1e-2
@@ -41,3 +49,5 @@ next_state_actual = expm(-im*sigmax*0.1)*init_state
 @test_approx_eq coeffs(next_state_ode45[1][2]) coeffs(next_state_actual)
 @test_approx_eq coeffs(next_state_ode78[1][2]) coeffs(next_state_actual)
 @test_approx_eq_eps coeffs(next_state_ode23s[1][2]) coeffs(next_state_actual) 1.0e-5
+@test_approx_eq coeffs(next_state_expm_expo[1][2]) coeffs(next_state_actual)
+@test_approx_eq coeffs(next_state_expm_expmv[1][2]) coeffs(next_state_actual)
