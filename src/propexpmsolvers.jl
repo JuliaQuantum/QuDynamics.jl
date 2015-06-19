@@ -1,15 +1,32 @@
 abstract QuExpo <: QuPropagatorMethod
 
-const type_to_method_expo = @compat Dict{Any, Any}(:QuExpm_Expo => Expokit.expmv, :QuExpm_ExpmV => ExpmV.expmv)
+@doc """
+Exponential solver, using Epokit.expmv
+Input Parameters :
+`options` : Dictionary to set the size of Krylov subspace and tolerance by using
+            keys as `:m` and `:tol`.
 
-for key in keys(type_to_method_expo)
-    @eval begin
-        immutable $key <: QuExpo
-            options::Dict{Symbol, Any}
-        end
-        $key() = $key(Dict())
-    end
+Step Propagation using the exponential solver Expokit.expmv.
+""" ->
+immutable QuExpm_Expo <: QuExpo
+    options::Dict{Symbol, Any}
 end
+
+QuExpm_Expo() = QuExpm_Expo(Dict())
+
+@doc """
+Exponential solver, using ExpmV.expmv
+Input Parameters :
+`options` : Dictionary to set M, precision, shift, full_term by using
+            keys as `:M`, `:precision`, `:shift`, `:full_term`
+
+Step Propagation using the exponential solver ExpmV.expmv.
+""" ->
+immutable QuExpm_ExpmV <: QuExpo
+    options::Dict{Symbol, Any}
+end
+
+QuExpm_ExpmV() = QuExpm_ExpmV(Dict())
 
 function propagate(prob::QuExpm_Expo, op, t, current_t, current_qustate)
     dt = t - current_t
