@@ -12,7 +12,7 @@ Step Propagation using the Crank Nicolson formula.
 
 
 *source:*
-[QuDynamics.jl/src/propstepsolvers.jl:13](https://github.com/amitjamadagni/QuDynamics.jl/tree/0db91ec4b0d16cbf3bb07ea07d1d5f3db6a1fce8/src/propstepsolvers.jl#L13)
+[QuDynamics.jl/src/propstepsolvers.jl:13](https://github.com/amitjamadagni/QuDynamics.jl/tree/473660e023dbcf579848d92b1318e375cf1c5c65/src/propstepsolvers.jl#L13)
 
 ---
 
@@ -24,7 +24,37 @@ Step Propagation using the Euler formula.
 
 
 *source:*
-[QuDynamics.jl/src/propstepsolvers.jl:5](https://github.com/amitjamadagni/QuDynamics.jl/tree/0db91ec4b0d16cbf3bb07ea07d1d5f3db6a1fce8/src/propstepsolvers.jl#L5)
+[QuDynamics.jl/src/propstepsolvers.jl:5](https://github.com/amitjamadagni/QuDynamics.jl/tree/473660e023dbcf579848d92b1318e375cf1c5c65/src/propstepsolvers.jl#L5)
+
+---
+
+<a id="type__quexpmv.1" class="lexicon_definition"></a>
+#### QuExpmV [¶](#type__quexpmv.1)
+Exponential solver, using ExpmV.expmv
+Input Parameters :
+`options` : Dictionary to set M, precision, shift, full_term by using
+            keys as `:M`, `:precision`, `:shift`, `:full_term`
+
+Step Propagation using the exponential solver ExpmV.expmv.
+
+
+*source:*
+[QuDynamics.jl/src/propexpmsolvers.jl:24](https://github.com/amitjamadagni/QuDynamics.jl/tree/473660e023dbcf579848d92b1318e375cf1c5c65/src/propexpmsolvers.jl#L24)
+
+---
+
+<a id="type__quexpokit.1" class="lexicon_definition"></a>
+#### QuExpokit [¶](#type__quexpokit.1)
+Exponential solver, using Epokit.expmv
+Input Parameters :
+`options` : Dictionary to set the size of Krylov subspace and tolerance by using
+            keys as `:m` and `:tol`.
+
+Step Propagation using the exponential solver Expokit.expmv.
+
+
+*source:*
+[QuDynamics.jl/src/propexpmsolvers.jl:10](https://github.com/amitjamadagni/QuDynamics.jl/tree/473660e023dbcf579848d92b1318e375cf1c5c65/src/propexpmsolvers.jl#L10)
 
 ---
 
@@ -41,7 +71,7 @@ Step Propagation using the Krylov subspace iterations.
 
 
 *source:*
-[QuDynamics.jl/src/propstepsolvers.jl:26](https://github.com/amitjamadagni/QuDynamics.jl/tree/0db91ec4b0d16cbf3bb07ea07d1d5f3db6a1fce8/src/propstepsolvers.jl#L26)
+[QuDynamics.jl/src/propstepsolvers.jl:26](https://github.com/amitjamadagni/QuDynamics.jl/tree/473660e023dbcf579848d92b1318e375cf1c5c65/src/propstepsolvers.jl#L26)
 
 ---
 
@@ -56,7 +86,7 @@ Step Propagation using the ode23s implementation from `ODE.jl`.
 
 
 *source:*
-[QuDynamics.jl/src/propodesolvers.jl:15](https://github.com/amitjamadagni/QuDynamics.jl/tree/0db91ec4b0d16cbf3bb07ea07d1d5f3db6a1fce8/src/propodesolvers.jl#L15)
+[QuDynamics.jl/src/propodesolvers.jl:15](https://github.com/amitjamadagni/QuDynamics.jl/tree/473660e023dbcf579848d92b1318e375cf1c5c65/src/propodesolvers.jl#L15)
 
 ---
 
@@ -71,7 +101,7 @@ Step Propagation using the ode45_dp implementation from `ODE.jl`.
 
 
 *source:*
-[QuDynamics.jl/src/propodesolvers.jl:15](https://github.com/amitjamadagni/QuDynamics.jl/tree/0db91ec4b0d16cbf3bb07ea07d1d5f3db6a1fce8/src/propodesolvers.jl#L15)
+[QuDynamics.jl/src/propodesolvers.jl:15](https://github.com/amitjamadagni/QuDynamics.jl/tree/473660e023dbcf579848d92b1318e375cf1c5c65/src/propodesolvers.jl#L15)
 
 ---
 
@@ -82,30 +112,30 @@ Input Parameters :
 `options` : Dictionary to set the relative tolerance and absolute tolerance by using
             keys as `:reltol` and `:abstol`.
 
-Step Propagation using the ode78 implementation from `ODE.jl`.
+Step Propagation using the ode78_fb implementation from `ODE.jl`.
 
 
 *source:*
-[QuDynamics.jl/src/propodesolvers.jl:15](https://github.com/amitjamadagni/QuDynamics.jl/tree/0db91ec4b0d16cbf3bb07ea07d1d5f3db6a1fce8/src/propodesolvers.jl#L15)
+[QuDynamics.jl/src/propodesolvers.jl:15](https://github.com/amitjamadagni/QuDynamics.jl/tree/473660e023dbcf579848d92b1318e375cf1c5c65/src/propodesolvers.jl#L15)
 
 ## Internal
 
 ---
 
 <a id="method__done.1" class="lexicon_definition"></a>
-#### done(prob::QuPropagator{QPM<:QuPropagatorMethod}, qustate::QuPropagatorState) [¶](#method__done.1)
+#### done(prob::QuPropagator{QPM<:QuPropagatorMethod, QVM<:Union(AbstractQuArray{B<:AbstractBasis{S<:AbstractStructure}, T, 1}, AbstractQuArray{B<:AbstractBasis{S<:AbstractStructure}, T, 2}), QE<:QuEquation}, qustate::QuPropagatorState) [¶](#method__done.1)
 Input Parameters : QuPropagator and QuPropagator State
 
 Returns true if the current state is final state, else false
 
 
 *source:*
-[QuDynamics.jl/src/propmachinery.jl:51](https://github.com/amitjamadagni/QuDynamics.jl/tree/0db91ec4b0d16cbf3bb07ea07d1d5f3db6a1fce8/src/propmachinery.jl#L51)
+[QuDynamics.jl/src/propmachinery.jl:55](https://github.com/amitjamadagni/QuDynamics.jl/tree/473660e023dbcf579848d92b1318e375cf1c5c65/src/propmachinery.jl#L55)
 
 ---
 
 <a id="method__next.1" class="lexicon_definition"></a>
-#### next{QPM<:QuPropagatorMethod}(prob::QuPropagator{QPM<:QuPropagatorMethod}, qustate::QuPropagatorState) [¶](#method__next.1)
+#### next{QPM<:QuPropagatorMethod}(prob::QuPropagator{QPM<:QuPropagatorMethod, QVM<:Union(AbstractQuArray{B<:AbstractBasis{S<:AbstractStructure}, T, 1}, AbstractQuArray{B<:AbstractBasis{S<:AbstractStructure}, T, 2}), QE<:QuEquation}, qustate::QuPropagatorState) [¶](#method__next.1)
 Input Parameters : QuPropagator and QuPropagator State
 
 Returns the next state by dispatching to particular
@@ -113,32 +143,32 @@ Returns the next state by dispatching to particular
 
 
 *source:*
-[QuDynamics.jl/src/propmachinery.jl:37](https://github.com/amitjamadagni/QuDynamics.jl/tree/0db91ec4b0d16cbf3bb07ea07d1d5f3db6a1fce8/src/propmachinery.jl#L37)
+[QuDynamics.jl/src/propmachinery.jl:42](https://github.com/amitjamadagni/QuDynamics.jl/tree/473660e023dbcf579848d92b1318e375cf1c5c65/src/propmachinery.jl#L42)
 
 ---
 
 <a id="method__propagate.1" class="lexicon_definition"></a>
-#### propagate(prob::QuEuler, op, t, current_t, current_qustate) [¶](#method__propagate.1)
+#### propagate(prob::QuEuler, eq::QuEquation, t, current_t, current_qustate) [¶](#method__propagate.1)
 Propagates to the next time state
 Input Parameters:
 `prob`             :  Method to be used
-`op`               :  Hamiltonian of the system
+`eq`               :  Quantum Equation type
 `t`                :  Time corresponding to the t_state
 `current_t`        :  Current time
 `current_qustate`  :  Quantum state corresponding to current time
 
 
 *source:*
-[QuDynamics.jl/src/propstepsolvers.jl:41](https://github.com/amitjamadagni/QuDynamics.jl/tree/0db91ec4b0d16cbf3bb07ea07d1d5f3db6a1fce8/src/propstepsolvers.jl#L41)
+[QuDynamics.jl/src/propstepsolvers.jl:41](https://github.com/amitjamadagni/QuDynamics.jl/tree/473660e023dbcf579848d92b1318e375cf1c5c65/src/propstepsolvers.jl#L41)
 
 ---
 
 <a id="method__start.1" class="lexicon_definition"></a>
-#### start(prob::QuPropagator{QPM<:QuPropagatorMethod}) [¶](#method__start.1)
+#### start(prob::QuPropagator{QPM<:QuPropagatorMethod, QVM<:Union(AbstractQuArray{B<:AbstractBasis{S<:AbstractStructure}, T, 1}, AbstractQuArray{B<:AbstractBasis{S<:AbstractStructure}, T, 2}), QE<:QuEquation}) [¶](#method__start.1)
 Input Parameters : QuPropagator
 
 Returns the starting iterator state of the propagator method, i.e., the initial state of the system
 
 
 *source:*
-[QuDynamics.jl/src/propmachinery.jl:25](https://github.com/amitjamadagni/QuDynamics.jl/tree/0db91ec4b0d16cbf3bb07ea07d1d5f3db6a1fce8/src/propmachinery.jl#L25)
+[QuDynamics.jl/src/propmachinery.jl:29](https://github.com/amitjamadagni/QuDynamics.jl/tree/473660e023dbcf579848d92b1318e375cf1c5c65/src/propmachinery.jl#L29)
