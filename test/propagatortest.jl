@@ -28,9 +28,9 @@ quode23s = QuPropagator(hamiltonian, init_state, tlist, QuODE23s())
 start_state_qode23s = start(quode23s)
 
 # Propagator using Exponential method for solving the equation.
-quexpm_expo  = QuPropagator(sigmax, init_state, tlist, QuExpm_Expo())
+quexpm_expo  = QuPropagator(sigmax, init_state, tlist, QuExpokit())
 start_state_quexpm_expo = start(quexpm_expo)
-quexpm_expmv  = QuPropagator(sigmax, init_state, tlist, QuExpm_ExpmV())
+quexpm_expmv  = QuPropagator(sigmax, init_state, tlist, QuExpmV())
 start_state_quexpm_expmv = start(quexpm_expmv)
 
 next_state_euler = next(qu_euler, start_state_euler)

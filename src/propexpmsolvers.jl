@@ -1,4 +1,4 @@
-abstract QuExpo <: QuPropagatorMethod
+abstract QuExponential <: QuPropagatorMethod
 
 @doc """
 Exponential solver, using Epokit.expmv
@@ -8,11 +8,11 @@ Input Parameters :
 
 Step Propagation using the exponential solver Expokit.expmv.
 """ ->
-immutable QuExpm_Expo <: QuExpo
+immutable QuExpokit <: QuExponential
     options::Dict{Symbol, Any}
 end
 
-QuExpm_Expo() = QuExpm_Expo(Dict())
+QuExpokit() = QuExpokit(Dict())
 
 @doc """
 Exponential solver, using ExpmV.expmv
@@ -22,24 +22,24 @@ Input Parameters :
 
 Step Propagation using the exponential solver ExpmV.expmv.
 """ ->
-immutable QuExpm_ExpmV <: QuExpo
+immutable QuExpmV <: QuExponential
     options::Dict{Symbol, Any}
 end
 
-QuExpm_ExpmV() = QuExpm_ExpmV(Dict())
+QuExpmV() = QuExpmV(Dict())
 
-function propagate(prob::QuExpm_Expo, op, t, current_t, current_qustate)
+function propagate(prob::QuExpokit, op, t, current_t, current_qustate)
     dt = t - current_t
     next_state = Expokit.expmv(dt, -im*coeffs(op), coeffs(current_qustate), m = get(prob.options, :m, 30), tol = get(prob.options, :tol, 1e-7))
     return QuArray(next_state)
 end
 
-function propagate(prob::QuExpm_ExpmV, op, t, current_t, current_qustate)
+function propagate(prob::QuExpmV, op, t, current_t, current_qustate)
     dt = t - current_t
     next_state = ExpmV.expmv(dt, -im*coeffs(op), coeffs(current_qustate), M = get(prob.options, :M, []), prec = get(prob.options, :prec, "double"),
                               shift = get(prob.options, :shift, false), full_term = get(prob.options, :full_term, false))
     return QuArray(next_state)
 end
 
-export QuExpm_Expo,
-      QuExpm_ExpmV
+export QuExpokit,
+      QuExpmV
