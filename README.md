@@ -10,18 +10,32 @@ Some of the discussion regarding design and implementation can be found [here](h
 
 **Dependencies**
 
-QuBase.jl
+* **QuBase.jl**
 
 This has to be added using
 ```julia
 Pkg.clone("https://github.com/JuliaQuantum/QuBase.jl.git")
 ```
 
-ODE.jl
+* **ODE.jl**
 
 This has been included but we require the latest master for some features. So perform a `checkout`
 ```julia
 Pkg.checkout("ODE")
+```
+
+* **Expokit.jl**
+
+This has to be added using
+```julia
+Pkg.clone("https://github.com/acroy/Expokit.jl.git")
+```
+
+* **ExpmV.jl**
+
+This has to be added using
+```julia
+Pkg.clone("https://github.com/marcusps/ExpmV.jl.git")
 ```
 
 **Usage**

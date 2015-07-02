@@ -11,6 +11,10 @@
 
 [QuEuler](QuDynamics.md#type__queuler.1)  Euler Method
 
+[QuExpmV](QuDynamics.md#type__quexpmv.1)  Exponential solver, using ExpmV.expmv
+
+[QuExpokit](QuDynamics.md#type__quexpokit.1)  Exponential solver, using Epokit.expmv
+
 [QuKrylov](QuDynamics.md#type__qukrylov.1)  Krylov subspace Method
 
 [QuODE23s](QuDynamics.md#type__quode23s.1)  ODE Method type QuODE23s
