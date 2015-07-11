@@ -10,11 +10,15 @@ end
 
 QuPropagator{QPM<:QuPropagatorMethod, QV<:QuBase.AbstractQuVector}(eq::QuSchrodingerEq, init_state::QV, tlist, method::QPM) = QuPropagator{QPM,QV,QuSchrodingerEq}(eq, init_state, tlist, method)
 
-QuPropagator{QPM<:QuPropagatorMethod, QV<:QuBase.AbstractQuVector}(param::QuBase.AbstractQuMatrix, init_state::QV,  tlist, method::QPM) = QuPropagator{QPM,QV,QuSchrodingerEq}(QuSchrodingerEq(param),init_state, tlist, method)
+QuPropagator{QPM<:QuPropagatorMethod, QV<:QuBase.AbstractQuVector}(hamiltonian::QuBase.AbstractQuMatrix, init_state::QV,  tlist, method::QPM) = QuPropagator{QPM,QV,QuSchrodingerEq}(QuSchrodingerEq(hamiltonian),init_state, tlist, method)
 
 QuPropagator{QPM<:QuPropagatorMethod, QM<:QuBase.AbstractQuMatrix}(eq::QuLiouvillevonNeumannEq, init_state::QM, tlist, method::QPM) = QuPropagator{QPM,QM,QuLiouvillevonNeumannEq}(eq, init_state, tlist, method)
 
-QuPropagator{QPM<:QuPropagatorMethod, QM<:QuBase.AbstractQuMatrix}(param::QuBase.AbstractQuMatrix, init_state::QM,  tlist, method::QPM) = QuPropagator{QPM,QM,QuLiouvillevonNeumannEq}(QuLiouvillevonNeumannEq(liouvillian_op(param)),init_state, tlist, method)
+QuPropagator{QPM<:QuPropagatorMethod, QM<:QuBase.AbstractQuMatrix}(hamiltonian::QuBase.AbstractQuMatrix, init_state::QM,  tlist, method::QPM) = QuPropagator{QPM,QM,QuLiouvillevonNeumannEq}(QuLiouvillevonNeumannEq(liouvillian_op(hamiltonian)),init_state, tlist, method)
+
+QuPropagator{QPM<:QuPropagatorMethod, QM<:QuBase.AbstractQuMatrix}(eq::QuLindbladMasterEq, init_state::QM, tlist, method::QPM) = QuPropagator{QPM,QM,QuLindbladMasterEq}(eq, init_state, tlist, method)
+
+QuPropagator{QPM<:QuPropagatorMethod, QM<:QuBase.AbstractQuMatrix, COT<:QuBase.AbstractQuMatrix}(hamiltonian::QuBase.AbstractQuMatrix, collapse_ops::Vector{COT}, init_state::QM, tlist, method::QPM) = QuPropagator{QPM,QM,QuLindbladMasterEq}(QuLindbladMasterEq(hamiltonian,collapse_ops), init_state, tlist, method)
 
 immutable QuPropagatorState
     psi
