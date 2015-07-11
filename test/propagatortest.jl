@@ -7,32 +7,25 @@ init_state = normalize!(QuArray([0.5+0.1im, 0.2+0.2im]))
 # Time step
 tlist = 0.:0.1:2*pi
 
-# Propagator using Euler method for solving the equation.
-qu_euler = QuPropagator(hamiltonian, init_state, tlist, QuEuler())
-start_state_euler = start(qu_euler)
+const solver = @compat Dict{Any, Any}(:qu_euler => QuEuler, :qu_cn => QuCrankNicolson, :qu_krylov => QuKrylov,
+                                      :qu_ode45 => QuODE45, :qu_ode78 => QuODE78, :qu_ode23s => QuODE23s,
+                                      :quexpm_expo => QuExpokit, :quexpm_expmv => QuExpmV)
 
-# Propagator using Crank Nicolson method for solving the equation.
-qu_cn = QuPropagator(hamiltonian, init_state, tlist, QuCrankNicolson())
-start_state_cn = start(qu_cn)
+for (key,value) in solver
+    @eval begin
+        $key = QuPropagator(hamiltonian, init_state, tlist, $value())
+    end
+end
 
-# Propagator using Krylov method for solving the equation.
-qu_krylov = QuPropagator(hamiltonian, init_state, tlist, QuKrylov())
-start_state_krylov = start(qu_krylov)
+const next_state = @compat Dict{Any, Any}(:next_state_euler => qu_euler, :next_state_cn => qu_cn, :next_state_krylov => qu_krylov,
+                                          :next_state_ode45 => qu_ode45, :next_state_ode78 => qu_ode78, :next_state_ode23s => qu_ode23s,
+                                          :next_state_quexpm_expo => quexpm_expo, :next_state_quexpm_expmv => quexpm_expmv)
 
-# Propagator using ODE methods for solving the equation.
-quode45 = QuPropagator(hamiltonian, init_state, tlist, QuODE45())
-start_state_qode45 = start(quode45)
-quode78 = QuPropagator(hamiltonian, init_state, tlist, QuODE78())
-start_state_qode78 = start(quode78)
-quode23s = QuPropagator(hamiltonian, init_state, tlist, QuODE23s())
-start_state_qode23s = start(quode23s)
-
-next_state_euler = next(qu_euler, start_state_euler)
-next_state_cn = next(qu_cn, start_state_cn)
-next_state_krylov = next(qu_krylov, start_state_krylov)
-next_state_ode45 = next(quode45, start_state_qode45)
-next_state_ode78 = next(quode78, start_state_qode78)
-next_state_ode23s = next(quode23s, start_state_qode23s)
+for (key,value) in next_state
+    @eval begin
+        $key = next($value, start($value))
+    end
+end
 next_state_actual = expm(-im*sigmax*0.1)*init_state
 
 @test_approx_eq_eps coeffs(next_state_euler[1][2]) coeffs(next_state_actual) 1e-2
@@ -41,3 +34,23 @@ next_state_actual = expm(-im*sigmax*0.1)*init_state
 @test_approx_eq coeffs(next_state_ode45[1][2]) coeffs(next_state_actual)
 @test_approx_eq coeffs(next_state_ode78[1][2]) coeffs(next_state_actual)
 @test_approx_eq_eps coeffs(next_state_ode23s[1][2]) coeffs(next_state_actual) 1.0e-5
+@test_approx_eq coeffs(next_state_quexpm_expo[1][2]) coeffs(next_state_actual)
+@test_approx_eq coeffs(next_state_quexpm_expmv[1][2]) coeffs(next_state_actual)
+
+lvn = QuLiouvillevonNeumannEq(QuDynamics.liouvillian_op(sigmax))
+
+qexpokit_lvn = QuPropagator(lvn, init_state*init_state', tlist, QuExpokit())
+qexpokit_dm = QuPropagator(sigmax, init_state*init_state', tlist, QuExpokit())
+next_state_qexpokit_lvn = next(qexpokit_lvn, start(qexpokit_lvn))
+next_state_qexpokit_dm = next(qexpokit_dm, start(qexpokit_dm))
+@assert next_state_qexpokit_lvn[1][2] == next_state_qexpokit_dm[1][2]
+qode45_lvn = QuPropagator(lvn, init_state*init_state', tlist, QuODE45())
+qode45_dm = QuPropagator(sigmax, init_state*init_state', tlist, QuODE45())
+next_state_qode45_lvn = next(qode45_lvn, start(qode45_lvn))
+next_state_qode45_dm = next(qode45_dm, start(qode45_dm))
+@assert next_state_qode45_lvn[1][2] == next_state_qode45_dm[1][2]
+qeuler_lvn = QuPropagator(lvn, init_state*init_state', tlist, QuEuler())
+qeuler_dm = QuPropagator(sigmax, init_state*init_state', tlist, QuEuler())
+next_state_qeuler_lvn = next(qeuler_lvn, start(qeuler_lvn))
+next_state_qeuler_dm = next(qeuler_dm, start(qeuler_dm))
+@assert next_state_qeuler_lvn[1][2] == next_state_qeuler_dm[1][2]

@@ -34,34 +34,45 @@ QuKrylov() = QuKrylov(@compat Dict(:NC=>10))
 Propagates to the next time state
 Input Parameters:
 `prob`             :  Method to be used
-`op`               :  Hamiltonian of the system
+`eq`               :  Quantum Equation type
 `t`                :  Time corresponding to the t_state
 `current_t`        :  Current time
 `current_qustate`  :  Quantum state corresponding to current time
 """ ->
-function propagate(prob::QuEuler, op, t, current_t, current_qustate)
+function propagate(prob::QuEuler, eq::QuEquation, t, current_t, current_qustate)
     dt = t - current_t
-    return (eye(op)-im*op*dt)*current_qustate
+    dims = size(current_qustate)
+    op = operator(eq)
+    next_state = (eye(op)-im*op*dt)*vec(current_qustate)
+    CQST = QuBase.similar_type(current_qustate)
+    return CQST(reshape(coeffs(next_state), dims), bases(current_qustate))
 end
 
-function propagate(prob::QuCrankNicolson, op, t, current_t, current_qustate)
+function propagate(prob::QuCrankNicolson, eq::QuEquation, t, current_t, current_qustate)
     dt = t - current_t
+    dims = size(current_qustate)
+    op = operator(eq)
     uni = eye(op)-im*op*dt/2
-    return \(uni', uni*current_qustate)
+    next_state = \(uni', uni*vec(current_qustate))
+    CQST = QuBase.similar_type(current_qustate)
+    return CQST(reshape(coeffs(next_state), dims), bases(current_qustate))
 end
 
-function propagate(prob::QuKrylov, op, t, current_t, current_qustate)
+function propagate(prob::QuKrylov, eq::QuEquation, t, current_t, current_qustate)
     dt = t - current_t
-    basis_size = get(prob.options,:NC, length(current_qustate))
-    N = min(basis_size, length(current_qustate))
-    v = Array(typeof(current_qustate),0)
+    dims = size(current_qustate)
+    cqs = vec(current_qustate)
+    basis_size = get(prob.options,:NC, length(cqs))
+    N = min(basis_size, length(cqs))
+    v = Array(typeof(cqs),0)
     @compat sizehint!(v, N+1)
-    push!(v,zeros(current_qustate))
-    push!(v,current_qustate)
+    push!(v,zeros(cqs))
+    push!(v,cqs)
     alpha = Array(Complex{Float64},0)
     @compat sizehint!(alpha, N)
     beta = Array(Complex{Float64},0)
     @compat sizehint!(beta, N+1)
+    op = operator(eq)
     push!(beta,0.)
     for i=2:N
         w = op*v[i]
@@ -75,13 +86,14 @@ function propagate(prob::QuKrylov, op, t, current_t, current_qustate)
     deleteat!(v,1)
     H_k = full(Tridiagonal(beta[2:end], alpha, beta[2:end]))
     U_k = expm(-im*dt*H_k)
-    next_state = zeros(current_qustate)
+    next_state = zeros(cqs)
     for j=1:N
         next_state = next_state + v[j]*U_k[j,1]
     end
-    return next_state
+    CQST = QuBase.similar_type(current_qustate)
+    return CQST(reshape(coeffs(next_state), dims), bases(current_qustate))
 end
 
 export  QuEuler,
-      QuCrankNicolson,
-      QuKrylov
+     QuCrankNicolson,
+     QuKrylov

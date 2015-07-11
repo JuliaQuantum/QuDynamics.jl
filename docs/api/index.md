@@ -11,6 +11,10 @@
 
 [QuEuler](QuDynamics.md#type__queuler.1)  Euler Method
 
+[QuExpmV](QuDynamics.md#type__quexpmv.1)  Exponential solver, using ExpmV.expmv
+
+[QuExpokit](QuDynamics.md#type__quexpokit.1)  Exponential solver, using Epokit.expmv
+
 [QuKrylov](QuDynamics.md#type__qukrylov.1)  Krylov subspace Method
 
 [QuODE23s](QuDynamics.md#type__quode23s.1)  ODE Method type QuODE23s
@@ -23,11 +27,11 @@
 
 ## Methods [Internal]
 
-[done(prob::QuPropagator{QPM<:QuPropagatorMethod}, qustate::QuPropagatorState)](QuDynamics.md#method__done.1)  Input Parameters : QuPropagator and QuPropagator State
+[done(prob::QuPropagator{QPM<:QuPropagatorMethod, QVM<:Union(AbstractQuArray{B<:AbstractBasis{S<:AbstractStructure}, T, 1}, AbstractQuArray{B<:AbstractBasis{S<:AbstractStructure}, T, 2}), QE<:QuEquation}, qustate::QuPropagatorState)](QuDynamics.md#method__done.1)  Input Parameters : QuPropagator and QuPropagator State
 
-[next{QPM<:QuPropagatorMethod}(prob::QuPropagator{QPM<:QuPropagatorMethod}, qustate::QuPropagatorState)](QuDynamics.md#method__next.1)  Input Parameters : QuPropagator and QuPropagator State
+[next{QPM<:QuPropagatorMethod}(prob::QuPropagator{QPM<:QuPropagatorMethod, QVM<:Union(AbstractQuArray{B<:AbstractBasis{S<:AbstractStructure}, T, 1}, AbstractQuArray{B<:AbstractBasis{S<:AbstractStructure}, T, 2}), QE<:QuEquation}, qustate::QuPropagatorState)](QuDynamics.md#method__next.1)  Input Parameters : QuPropagator and QuPropagator State
 
-[propagate(prob::QuEuler, op, t, current_t, current_qustate)](QuDynamics.md#method__propagate.1)  Propagates to the next time state
+[propagate(prob::QuEuler, eq::QuEquation, t, current_t, current_qustate)](QuDynamics.md#method__propagate.1)  Propagates to the next time state
 
-[start(prob::QuPropagator{QPM<:QuPropagatorMethod})](QuDynamics.md#method__start.1)  Input Parameters : QuPropagator
+[start(prob::QuPropagator{QPM<:QuPropagatorMethod, QVM<:Union(AbstractQuArray{B<:AbstractBasis{S<:AbstractStructure}, T, 1}, AbstractQuArray{B<:AbstractBasis{S<:AbstractStructure}, T, 2}), QE<:QuEquation})](QuDynamics.md#method__start.1)  Input Parameters : QuPropagator
 

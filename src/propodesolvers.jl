@@ -1,31 +1,34 @@
 abstract QuODESolvers <: QuPropagatorMethod
 
-const type_to_method = @compat Dict{Any, Any}(:QuODE45 => ODE.ode45, :QuODE78 => ODE.ode78, :QuODE23s => ODE.ode23s)
+const type_to_method_ode = @compat Dict{Any, Any}(:QuODE45 => ODE.ode45, :QuODE78 => ODE.ode78, :QuODE23s => ODE.ode23s)
 
-for op in keys(type_to_method)
-    text = type_to_method[op]
+for qu_ode_type in keys(type_to_method_ode)
+    method_name = type_to_method_ode[qu_ode_type]
     @eval  begin
         @doc """
-        ODE Method type $($(op))
+        ODE Method type $($(qu_ode_type))
         Input Parameters :
         `options` : Dictionary to set the relative tolerance and absolute tolerance by using
                     keys as `:reltol` and `:abstol`.
 
-        Step Propagation using the $($(text)) implementation from `ODE.jl`.
+        Step Propagation using the $($(method_name)) implementation from `ODE.jl`.
         """ ->
-        immutable $op <: QuODESolvers
+        immutable $qu_ode_type <: QuODESolvers
             options::Dict{Symbol, Any}
         end
-        $op() = $op(Dict())
+        $qu_ode_type() = $qu_ode_type(Dict())
     end
 end
 
-for (key,value) in type_to_method
+for (qu_ode_type,ode_solver) in type_to_method_ode
     @eval  begin
-        function propagate(prob::$key, op, t, current_t, current_qustate)
-            next_state = $value((t,y)-> -im*coeffs(op)*y, coeffs(current_qustate), [current_t, t], points=:specified,
+        function propagate(prob::$qu_ode_type, eq::QuEquation, t, current_t, current_qustate)
+            op = operator(eq)
+            dims = size(current_qustate)
+            next_state = $ode_solver((t,y)-> -im*coeffs(op)*y, coeffs(vec(current_qustate)), [current_t, t], points=:specified,
                                   reltol = get(prob.options, :reltol, 1.0e-5), abstol = get(prob.options, :abstol, 1.0e-8))[2][end]
-            return QuArray(next_state)
+            CQST = QuBase.similar_type(current_qustate)
+            return CQST(reshape(next_state, dims), bases(current_qustate))
         end
     end
 end
