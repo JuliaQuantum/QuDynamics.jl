@@ -31,6 +31,10 @@
 
 [QuLiouvillevonNeumannEq{H<:AbstractQuArray{B<:AbstractBasis{S<:AbstractStructure}, T, 2}}](QuDynamics.md#type__quliouvillevonneumanneq.1)  Liouville von Neumann Equation type
 
+[QuMCWF](QuDynamics.md#type__qumcwf.1)  Quantum Monte-Carlo Wave Function Method
+
+[QuMCWFEnsemble{QA<:AbstractQuArray{B<:AbstractBasis{S<:AbstractStructure}, T, N}}](QuDynamics.md#type__qumcwfensemble.1)  Ensemble of state, number of trajectories, decomposition based on the state.
+
 [QuODE23s](QuDynamics.md#type__quode23s.1)  ODE Method type QuODE23s
 
 [QuODE45](QuDynamics.md#type__quode45.1)  ODE Method type QuODE45
@@ -43,7 +47,15 @@
 
 ## Methods [Internal]
 
-[done(prob::QuPropagator{QPM<:QuPropagatorMethod, QVM<:Union(AbstractQuArray{B<:AbstractBasis{S<:AbstractStructure}, T, 2}, AbstractQuArray{B<:AbstractBasis{S<:AbstractStructure}, T, 1}), QE<:QuEquation}, qustate::QuPropagatorState)](QuDynamics.md#method__done.1)  Input Parameters : QuPropagator and QuPropagator State
+[done(mcwfensemble::QuMCWFEnsemble{QA<:AbstractQuArray{B<:AbstractBasis{S<:AbstractStructure}, T, N}}, i::Int64)](QuDynamics.md#method__done.1)  Input Parameters : QuMCWFEnsemble and iterator state
+
+[done(prob::QuPropagator{QPM<:QuPropagatorMethod, QVM<:Union(AbstractQuArray{B<:AbstractBasis{S<:AbstractStructure}, T, 2}, AbstractQuArray{B<:AbstractBasis{S<:AbstractStructure}, T, 1}), QE<:QuEquation}, qustate::QuPropagatorState)](QuDynamics.md#method__done.2)  Input Parameters : QuPropagator and QuPropagator State
+
+[draw{QM<:AbstractQuArray{B<:AbstractBasis{S<:AbstractStructure}, T, 2}}(mcwfensemble::QuMCWFEnsemble{QM<:AbstractQuArray{B<:AbstractBasis{S<:AbstractStructure}, T, 2}})](QuDynamics.md#method__draw.1)  Input Parameters : QuMCWFEnsemble which takes a AbstractQuMatrix as a parameter
+
+[draw{QV<:AbstractQuArray{B<:AbstractBasis{S<:AbstractStructure}, T, 1}}(mcwfensemble::QuMCWFEnsemble{QV<:AbstractQuArray{B<:AbstractBasis{S<:AbstractStructure}, T, 1}})](QuDynamics.md#method__draw.2)  Input Parameters : QuMCWFEnsemble which takes a AbstractQuVector as a parameter
+
+[eff_hamiltonian(lme::QuLindbladMasterEq{L<:AbstractQuArray{B<:AbstractBasis{S<:AbstractStructure}, T, 2}, H<:AbstractQuArray{B<:AbstractBasis{S<:AbstractStructure}, T, 2}, V<:AbstractQuArray{B<:AbstractBasis{S<:AbstractStructure}, T, 2}})](QuDynamics.md#method__eff_hamiltonian.1)  Input Parameters : QuLindbladMasterEq type parameter
 
 [lindblad_op(hamiltonian::AbstractQuArray{B<:AbstractBasis{S<:AbstractStructure}, T, 2}, collapse_ops::Array{T, 1})](QuDynamics.md#method__lindblad_op.1)  Lindblad operator construct from the `Hamiltonian` and `collapse operators`
 
@@ -51,7 +63,9 @@
 
 [liouvillian_tensor(hamiltonian::AbstractQuArray{B<:AbstractBasis{S<:AbstractStructure}, T, 2})](QuDynamics.md#method__liouvillian_tensor.1)  An altenate version for liouvillian operator construct (might be depreciated)
 
-[next{QPM<:QuPropagatorMethod}(prob::QuPropagator{QPM<:QuPropagatorMethod, QVM<:Union(AbstractQuArray{B<:AbstractBasis{S<:AbstractStructure}, T, 2}, AbstractQuArray{B<:AbstractBasis{S<:AbstractStructure}, T, 1}), QE<:QuEquation}, qustate::QuPropagatorState)](QuDynamics.md#method__next.1)  Input Parameters : QuPropagator and QuPropagator State
+[next(mcwfensemble::QuMCWFEnsemble{QA<:AbstractQuArray{B<:AbstractBasis{S<:AbstractStructure}, T, N}}, i::Int64)](QuDynamics.md#method__next.1)  Input Parameters : QuMCWFEnsemble and iterator state
+
+[next{QPM<:QuPropagatorMethod}(prob::QuPropagator{QPM<:QuPropagatorMethod, QVM<:Union(AbstractQuArray{B<:AbstractBasis{S<:AbstractStructure}, T, 2}, AbstractQuArray{B<:AbstractBasis{S<:AbstractStructure}, T, 1}), QE<:QuEquation}, qustate::QuPropagatorState)](QuDynamics.md#method__next.2)  Input Parameters : QuPropagator and QuPropagator State
 
 [operator(qu_eq::QuLindbladMasterEq{L<:AbstractQuArray{B<:AbstractBasis{S<:AbstractStructure}, T, 2}, H<:AbstractQuArray{B<:AbstractBasis{S<:AbstractStructure}, T, 2}, V<:AbstractQuArray{B<:AbstractBasis{S<:AbstractStructure}, T, 2}})](QuDynamics.md#method__operator.1)  Input Parameters : QuLindbladMasterEq type
 
@@ -61,5 +75,7 @@
 
 [propagate(prob::QuEuler, eq::QuEquation, t, current_t, current_qustate)](QuDynamics.md#method__propagate.1)  Propagates to the next time state
 
-[start(prob::QuPropagator{QPM<:QuPropagatorMethod, QVM<:Union(AbstractQuArray{B<:AbstractBasis{S<:AbstractStructure}, T, 2}, AbstractQuArray{B<:AbstractBasis{S<:AbstractStructure}, T, 1}), QE<:QuEquation})](QuDynamics.md#method__start.1)  Input Parameters : QuPropagator
+[start(mcwfensemble::QuMCWFEnsemble{QA<:AbstractQuArray{B<:AbstractBasis{S<:AbstractStructure}, T, N}})](QuDynamics.md#method__start.1)  Input Parameters : QuMCWFEnsemble
+
+[start(prob::QuPropagator{QPM<:QuPropagatorMethod, QVM<:Union(AbstractQuArray{B<:AbstractBasis{S<:AbstractStructure}, T, 2}, AbstractQuArray{B<:AbstractBasis{S<:AbstractStructure}, T, 1}), QE<:QuEquation})](QuDynamics.md#method__start.2)  Input Parameters : QuPropagator
 

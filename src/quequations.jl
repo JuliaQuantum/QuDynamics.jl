@@ -164,6 +164,20 @@ function operator(qu_eq::QuLindbladMasterEq)
     return qu_eq.lindblad
 end
 
+@doc """
+Input Parameters : QuLindbladMasterEq type parameter
+
+Returns the effective hamiltonian calculated using the hamiltonian and
+collapse operators.
+""" ->
+function eff_hamiltonian(lme::QuLindbladMasterEq)
+    heff = lme.hamiltonian
+    for c_ops in lme.collapse_ops
+       heff = heff - im*0.5*c_ops'*c_ops
+    end
+    return heff
+end
+
 export QuEquation,
       QuSchrodingerEq,
       QuLiouvillevonNeumannEq,

@@ -10,4 +10,5 @@ module QuDynamics
     include("propstepsolvers.jl")
     include("propodesolvers.jl")
     include("propexpmsolvers.jl")
+    include("propmcwf.jl")
 end
