@@ -7,7 +7,7 @@ type SampleProc{Alg} <: Proc end
 # Jaynes-Cummings type which takes the configuration parameters.
 # These parameters are used for benchmarking, creating various
 # JaynesCummings types with various parameters and using
-# the above solvers to get the timing results.
+# the solvers to get the timing results.
 type JaynesCummings
     N::Int
     wc::Float64
