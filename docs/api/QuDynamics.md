@@ -15,7 +15,7 @@ Input Parameters :
 
 
 *source:*
-[QuDynamics.jl/src/quequations.jl:68](https://github.com/amitjamadagni/QuDynamics.jl/tree/96819bf75eb5059b3ba6719ee1fc193349d867d9/src/quequations.jl#L68)
+[QuDynamics.jl/src/quequations.jl:68](https://github.com/amitjamadagni/QuDynamics.jl/tree/4e8fbe16f66de06394a2bd28a4cfd81993fb1586/src/quequations.jl#L68)
 
 ---
 
@@ -29,7 +29,7 @@ Input Parameters :
 
 
 *source:*
-[QuDynamics.jl/src/quequations.jl:42](https://github.com/amitjamadagni/QuDynamics.jl/tree/96819bf75eb5059b3ba6719ee1fc193349d867d9/src/quequations.jl#L42)
+[QuDynamics.jl/src/quequations.jl:42](https://github.com/amitjamadagni/QuDynamics.jl/tree/4e8fbe16f66de06394a2bd28a4cfd81993fb1586/src/quequations.jl#L42)
 
 ---
 
@@ -43,7 +43,7 @@ Input Parameters :
 
 
 *source:*
-[QuDynamics.jl/src/quequations.jl:21](https://github.com/amitjamadagni/QuDynamics.jl/tree/96819bf75eb5059b3ba6719ee1fc193349d867d9/src/quequations.jl#L21)
+[QuDynamics.jl/src/quequations.jl:21](https://github.com/amitjamadagni/QuDynamics.jl/tree/4e8fbe16f66de06394a2bd28a4cfd81993fb1586/src/quequations.jl#L21)
 
 ---
 
@@ -55,7 +55,7 @@ Step Propagation using the Crank Nicolson formula.
 
 
 *source:*
-[QuDynamics.jl/src/propstepsolvers.jl:13](https://github.com/amitjamadagni/QuDynamics.jl/tree/96819bf75eb5059b3ba6719ee1fc193349d867d9/src/propstepsolvers.jl#L13)
+[QuDynamics.jl/src/propstepsolvers.jl:13](https://github.com/amitjamadagni/QuDynamics.jl/tree/4e8fbe16f66de06394a2bd28a4cfd81993fb1586/src/propstepsolvers.jl#L13)
 
 ---
 
@@ -67,7 +67,7 @@ Step Propagation using the Euler formula.
 
 
 *source:*
-[QuDynamics.jl/src/propstepsolvers.jl:5](https://github.com/amitjamadagni/QuDynamics.jl/tree/96819bf75eb5059b3ba6719ee1fc193349d867d9/src/propstepsolvers.jl#L5)
+[QuDynamics.jl/src/propstepsolvers.jl:5](https://github.com/amitjamadagni/QuDynamics.jl/tree/4e8fbe16f66de06394a2bd28a4cfd81993fb1586/src/propstepsolvers.jl#L5)
 
 ---
 
@@ -82,7 +82,7 @@ Step Propagation using the exponential solver ExpmV.expmv.
 
 
 *source:*
-[QuDynamics.jl/src/propexpmsolvers.jl:24](https://github.com/amitjamadagni/QuDynamics.jl/tree/96819bf75eb5059b3ba6719ee1fc193349d867d9/src/propexpmsolvers.jl#L24)
+[QuDynamics.jl/src/propexpmsolvers.jl:24](https://github.com/amitjamadagni/QuDynamics.jl/tree/4e8fbe16f66de06394a2bd28a4cfd81993fb1586/src/propexpmsolvers.jl#L24)
 
 ---
 
@@ -97,7 +97,7 @@ Step Propagation using the exponential solver Expokit.expmv.
 
 
 *source:*
-[QuDynamics.jl/src/propexpmsolvers.jl:10](https://github.com/amitjamadagni/QuDynamics.jl/tree/96819bf75eb5059b3ba6719ee1fc193349d867d9/src/propexpmsolvers.jl#L10)
+[QuDynamics.jl/src/propexpmsolvers.jl:10](https://github.com/amitjamadagni/QuDynamics.jl/tree/4e8fbe16f66de06394a2bd28a4cfd81993fb1586/src/propexpmsolvers.jl#L10)
 
 ---
 
@@ -114,7 +114,7 @@ Step Propagation using the Krylov subspace iterations.
 
 
 *source:*
-[QuDynamics.jl/src/propstepsolvers.jl:26](https://github.com/amitjamadagni/QuDynamics.jl/tree/96819bf75eb5059b3ba6719ee1fc193349d867d9/src/propstepsolvers.jl#L26)
+[QuDynamics.jl/src/propstepsolvers.jl:26](https://github.com/amitjamadagni/QuDynamics.jl/tree/4e8fbe16f66de06394a2bd28a4cfd81993fb1586/src/propstepsolvers.jl#L26)
 
 ---
 
@@ -130,7 +130,7 @@ Fields :
 
 
 *source:*
-[QuDynamics.jl/src/quequations.jl:53](https://github.com/amitjamadagni/QuDynamics.jl/tree/96819bf75eb5059b3ba6719ee1fc193349d867d9/src/quequations.jl#L53)
+[QuDynamics.jl/src/quequations.jl:53](https://github.com/amitjamadagni/QuDynamics.jl/tree/4e8fbe16f66de06394a2bd28a4cfd81993fb1586/src/quequations.jl#L53)
 
 ---
 
@@ -144,7 +144,38 @@ Fields :
 
 
 *source:*
-[QuDynamics.jl/src/quequations.jl:30](https://github.com/amitjamadagni/QuDynamics.jl/tree/96819bf75eb5059b3ba6719ee1fc193349d867d9/src/quequations.jl#L30)
+[QuDynamics.jl/src/quequations.jl:30](https://github.com/amitjamadagni/QuDynamics.jl/tree/4e8fbe16f66de06394a2bd28a4cfd81993fb1586/src/quequations.jl#L30)
+
+---
+
+<a id="type__qumcwf.1" class="lexicon_definition"></a>
+#### QuMCWF [¶](#type__qumcwf.1)
+Quantum Monte-Carlo Wave Function Method
+Input Parameters :
+`eps`     : random number used in comparison of jtol and norm of the state drawn
+`options` : Dictionary to set the solver used to proagate the state generated using draw.
+
+Step Propagation using Quantum Monte-Carlo Wave Function Method.
+
+
+*source:*
+[QuDynamics.jl/src/propmcwf.jl:8](https://github.com/amitjamadagni/QuDynamics.jl/tree/4e8fbe16f66de06394a2bd28a4cfd81993fb1586/src/propmcwf.jl#L8)
+
+---
+
+<a id="type__qumcwfensemble.1" class="lexicon_definition"></a>
+#### QuMCWFEnsemble{QA<:AbstractQuArray{B<:AbstractBasis{S<:AbstractStructure}, T, N}} [¶](#type__qumcwfensemble.1)
+Ensemble of state, number of trajectories, decomposition based on the state.
+
+Fields :
+
+`rho`   : state of the system
+`ntraj` : number of trajectories
+`decomp`: decomposition is of state `rho` if `rho` is a QuMatrix.
+
+
+*source:*
+[QuDynamics.jl/src/propmcwf.jl:24](https://github.com/amitjamadagni/QuDynamics.jl/tree/4e8fbe16f66de06394a2bd28a4cfd81993fb1586/src/propmcwf.jl#L24)
 
 ---
 
@@ -159,7 +190,7 @@ Step Propagation using the ode23s implementation from `ODE.jl`.
 
 
 *source:*
-[QuDynamics.jl/src/propodesolvers.jl:15](https://github.com/amitjamadagni/QuDynamics.jl/tree/96819bf75eb5059b3ba6719ee1fc193349d867d9/src/propodesolvers.jl#L15)
+[QuDynamics.jl/src/propodesolvers.jl:15](https://github.com/amitjamadagni/QuDynamics.jl/tree/4e8fbe16f66de06394a2bd28a4cfd81993fb1586/src/propodesolvers.jl#L15)
 
 ---
 
@@ -174,7 +205,7 @@ Step Propagation using the ode45_dp implementation from `ODE.jl`.
 
 
 *source:*
-[QuDynamics.jl/src/propodesolvers.jl:15](https://github.com/amitjamadagni/QuDynamics.jl/tree/96819bf75eb5059b3ba6719ee1fc193349d867d9/src/propodesolvers.jl#L15)
+[QuDynamics.jl/src/propodesolvers.jl:15](https://github.com/amitjamadagni/QuDynamics.jl/tree/4e8fbe16f66de06394a2bd28a4cfd81993fb1586/src/propodesolvers.jl#L15)
 
 ---
 
@@ -189,7 +220,7 @@ Step Propagation using the ode78 implementation from `ODE.jl`.
 
 
 *source:*
-[QuDynamics.jl/src/propodesolvers.jl:15](https://github.com/amitjamadagni/QuDynamics.jl/tree/96819bf75eb5059b3ba6719ee1fc193349d867d9/src/propodesolvers.jl#L15)
+[QuDynamics.jl/src/propodesolvers.jl:15](https://github.com/amitjamadagni/QuDynamics.jl/tree/4e8fbe16f66de06394a2bd28a4cfd81993fb1586/src/propodesolvers.jl#L15)
 
 ---
 
@@ -203,21 +234,71 @@ Fields :
 
 
 *source:*
-[QuDynamics.jl/src/quequations.jl:9](https://github.com/amitjamadagni/QuDynamics.jl/tree/96819bf75eb5059b3ba6719ee1fc193349d867d9/src/quequations.jl#L9)
+[QuDynamics.jl/src/quequations.jl:9](https://github.com/amitjamadagni/QuDynamics.jl/tree/4e8fbe16f66de06394a2bd28a4cfd81993fb1586/src/quequations.jl#L9)
 
 ## Internal
 
 ---
 
 <a id="method__done.1" class="lexicon_definition"></a>
-#### done(prob::QuPropagator{QPM<:QuPropagatorMethod, QVM<:Union(AbstractQuArray{B<:AbstractBasis{S<:AbstractStructure}, T, 2}, AbstractQuArray{B<:AbstractBasis{S<:AbstractStructure}, T, 1}), QE<:QuEquation}, qustate::QuPropagatorState) [¶](#method__done.1)
+#### done(mcwfensemble::QuMCWFEnsemble{QA<:AbstractQuArray{B<:AbstractBasis{S<:AbstractStructure}, T, N}}, i::Int64) [¶](#method__done.1)
+Input Parameters : QuMCWFEnsemble and iterator state
+
+Compares the iterator state with the number of trajectories and
+returns true or false depending on the comparison.
+
+
+*source:*
+[QuDynamics.jl/src/propmcwf.jl:57](https://github.com/amitjamadagni/QuDynamics.jl/tree/4e8fbe16f66de06394a2bd28a4cfd81993fb1586/src/propmcwf.jl#L57)
+
+---
+
+<a id="method__done.2" class="lexicon_definition"></a>
+#### done(prob::QuPropagator{QPM<:QuPropagatorMethod, QVM<:Union(AbstractQuArray{B<:AbstractBasis{S<:AbstractStructure}, T, 2}, AbstractQuArray{B<:AbstractBasis{S<:AbstractStructure}, T, 1}), QE<:QuEquation}, qustate::QuPropagatorState) [¶](#method__done.2)
 Input Parameters : QuPropagator and QuPropagator State
 
 Returns true if the current state is final state, else false
 
 
 *source:*
-[QuDynamics.jl/src/propmachinery.jl:59](https://github.com/amitjamadagni/QuDynamics.jl/tree/96819bf75eb5059b3ba6719ee1fc193349d867d9/src/propmachinery.jl#L59)
+[QuDynamics.jl/src/propmachinery.jl:61](https://github.com/amitjamadagni/QuDynamics.jl/tree/4e8fbe16f66de06394a2bd28a4cfd81993fb1586/src/propmachinery.jl#L61)
+
+---
+
+<a id="method__draw.1" class="lexicon_definition"></a>
+#### draw{QM<:AbstractQuArray{B<:AbstractBasis{S<:AbstractStructure}, T, 2}}(mcwfensemble::QuMCWFEnsemble{QM<:AbstractQuArray{B<:AbstractBasis{S<:AbstractStructure}, T, 2}}) [¶](#method__draw.1)
+Input Parameters : QuMCWFEnsemble which takes a AbstractQuMatrix as a parameter
+
+Returns state vector using the decomposition of AbstractQuMatrix.
+
+
+*source:*
+[QuDynamics.jl/src/propmcwf.jl:66](https://github.com/amitjamadagni/QuDynamics.jl/tree/4e8fbe16f66de06394a2bd28a4cfd81993fb1586/src/propmcwf.jl#L66)
+
+---
+
+<a id="method__draw.2" class="lexicon_definition"></a>
+#### draw{QV<:AbstractQuArray{B<:AbstractBasis{S<:AbstractStructure}, T, 1}}(mcwfensemble::QuMCWFEnsemble{QV<:AbstractQuArray{B<:AbstractBasis{S<:AbstractStructure}, T, 1}}) [¶](#method__draw.2)
+Input Parameters : QuMCWFEnsemble which takes a AbstractQuVector as a parameter
+
+Returns a copy of the state passed through the input parameter.
+
+
+*source:*
+[QuDynamics.jl/src/propmcwf.jl:82](https://github.com/amitjamadagni/QuDynamics.jl/tree/4e8fbe16f66de06394a2bd28a4cfd81993fb1586/src/propmcwf.jl#L82)
+
+---
+
+<a id="method__eff_hamiltonian.1" class="lexicon_definition"></a>
+#### eff_hamiltonian(lme::QuLindbladMasterEq{L<:AbstractQuArray{B<:AbstractBasis{S<:AbstractStructure}, T, 2}, H<:AbstractQuArray{B<:AbstractBasis{S<:AbstractStructure}, T, 2}, V<:AbstractQuArray{B<:AbstractBasis{S<:AbstractStructure}, T, 2}}) [¶](#method__eff_hamiltonian.1)
+Input Parameters : QuLindbladMasterEq type parameter
+
+Returns the effective hamiltonian calculated using the hamiltonian and
+collapse operators.
+
+
+*source:*
+[QuDynamics.jl/src/propmcwf.jl:92](https://github.com/amitjamadagni/QuDynamics.jl/tree/4e8fbe16f66de06394a2bd28a4cfd81993fb1586/src/propmcwf.jl#L92)
 
 ---
 
@@ -232,7 +313,7 @@ Input Parameters :
 
 
 *source:*
-[QuDynamics.jl/src/quequations.jl:78](https://github.com/amitjamadagni/QuDynamics.jl/tree/96819bf75eb5059b3ba6719ee1fc193349d867d9/src/quequations.jl#L78)
+[QuDynamics.jl/src/quequations.jl:81](https://github.com/amitjamadagni/QuDynamics.jl/tree/4e8fbe16f66de06394a2bd28a4cfd81993fb1586/src/quequations.jl#L81)
 
 ---
 
@@ -246,7 +327,7 @@ Input Parameters :
 
 
 *source:*
-[QuDynamics.jl/src/quequations.jl:123](https://github.com/amitjamadagni/QuDynamics.jl/tree/96819bf75eb5059b3ba6719ee1fc193349d867d9/src/quequations.jl#L123)
+[QuDynamics.jl/src/quequations.jl:126](https://github.com/amitjamadagni/QuDynamics.jl/tree/4e8fbe16f66de06394a2bd28a4cfd81993fb1586/src/quequations.jl#L126)
 
 ---
 
@@ -260,12 +341,25 @@ Input Parameters :
 
 
 *source:*
-[QuDynamics.jl/src/quequations.jl:132](https://github.com/amitjamadagni/QuDynamics.jl/tree/96819bf75eb5059b3ba6719ee1fc193349d867d9/src/quequations.jl#L132)
+[QuDynamics.jl/src/quequations.jl:135](https://github.com/amitjamadagni/QuDynamics.jl/tree/4e8fbe16f66de06394a2bd28a4cfd81993fb1586/src/quequations.jl#L135)
 
 ---
 
 <a id="method__next.1" class="lexicon_definition"></a>
-#### next{QPM<:QuPropagatorMethod}(prob::QuPropagator{QPM<:QuPropagatorMethod, QVM<:Union(AbstractQuArray{B<:AbstractBasis{S<:AbstractStructure}, T, 2}, AbstractQuArray{B<:AbstractBasis{S<:AbstractStructure}, T, 1}), QE<:QuEquation}, qustate::QuPropagatorState) [¶](#method__next.1)
+#### next(mcwfensemble::QuMCWFEnsemble{QA<:AbstractQuArray{B<:AbstractBasis{S<:AbstractStructure}, T, N}}, i::Int64) [¶](#method__next.1)
+Input Parameters : QuMCWFEnsemble and iterator state
+
+Returns the next state by using `draw` function
+to draw the next state and iterator state.
+
+
+*source:*
+[QuDynamics.jl/src/propmcwf.jl:46](https://github.com/amitjamadagni/QuDynamics.jl/tree/4e8fbe16f66de06394a2bd28a4cfd81993fb1586/src/propmcwf.jl#L46)
+
+---
+
+<a id="method__next.2" class="lexicon_definition"></a>
+#### next{QPM<:QuPropagatorMethod}(prob::QuPropagator{QPM<:QuPropagatorMethod, QVM<:Union(AbstractQuArray{B<:AbstractBasis{S<:AbstractStructure}, T, 2}, AbstractQuArray{B<:AbstractBasis{S<:AbstractStructure}, T, 1}), QE<:QuEquation}, qustate::QuPropagatorState) [¶](#method__next.2)
 Input Parameters : QuPropagator and QuPropagator State
 
 Returns the next state by dispatching to particular
@@ -273,7 +367,7 @@ Returns the next state by dispatching to particular
 
 
 *source:*
-[QuDynamics.jl/src/propmachinery.jl:46](https://github.com/amitjamadagni/QuDynamics.jl/tree/96819bf75eb5059b3ba6719ee1fc193349d867d9/src/propmachinery.jl#L46)
+[QuDynamics.jl/src/propmachinery.jl:48](https://github.com/amitjamadagni/QuDynamics.jl/tree/4e8fbe16f66de06394a2bd28a4cfd81993fb1586/src/propmachinery.jl#L48)
 
 ---
 
@@ -285,7 +379,7 @@ Returns the `lindblad operator` of the `QuLindbladMasterEq` type.
 
 
 *source:*
-[QuDynamics.jl/src/quequations.jl:159](https://github.com/amitjamadagni/QuDynamics.jl/tree/96819bf75eb5059b3ba6719ee1fc193349d867d9/src/quequations.jl#L159)
+[QuDynamics.jl/src/quequations.jl:162](https://github.com/amitjamadagni/QuDynamics.jl/tree/4e8fbe16f66de06394a2bd28a4cfd81993fb1586/src/quequations.jl#L162)
 
 ---
 
@@ -297,7 +391,7 @@ Returns the `liouvillian` of the `QuLiouvillevonNeumannEq` type.
 
 
 *source:*
-[QuDynamics.jl/src/quequations.jl:141](https://github.com/amitjamadagni/QuDynamics.jl/tree/96819bf75eb5059b3ba6719ee1fc193349d867d9/src/quequations.jl#L141)
+[QuDynamics.jl/src/quequations.jl:144](https://github.com/amitjamadagni/QuDynamics.jl/tree/4e8fbe16f66de06394a2bd28a4cfd81993fb1586/src/quequations.jl#L144)
 
 ---
 
@@ -309,7 +403,7 @@ Returns the `hamiltonian` of the `QuSchrodingerEq` type.
 
 
 *source:*
-[QuDynamics.jl/src/quequations.jl:150](https://github.com/amitjamadagni/QuDynamics.jl/tree/96819bf75eb5059b3ba6719ee1fc193349d867d9/src/quequations.jl#L150)
+[QuDynamics.jl/src/quequations.jl:153](https://github.com/amitjamadagni/QuDynamics.jl/tree/4e8fbe16f66de06394a2bd28a4cfd81993fb1586/src/quequations.jl#L153)
 
 ---
 
@@ -325,16 +419,28 @@ Input Parameters:
 
 
 *source:*
-[QuDynamics.jl/src/propstepsolvers.jl:41](https://github.com/amitjamadagni/QuDynamics.jl/tree/96819bf75eb5059b3ba6719ee1fc193349d867d9/src/propstepsolvers.jl#L41)
+[QuDynamics.jl/src/propstepsolvers.jl:41](https://github.com/amitjamadagni/QuDynamics.jl/tree/4e8fbe16f66de06394a2bd28a4cfd81993fb1586/src/propstepsolvers.jl#L41)
 
 ---
 
 <a id="method__start.1" class="lexicon_definition"></a>
-#### start(prob::QuPropagator{QPM<:QuPropagatorMethod, QVM<:Union(AbstractQuArray{B<:AbstractBasis{S<:AbstractStructure}, T, 2}, AbstractQuArray{B<:AbstractBasis{S<:AbstractStructure}, T, 1}), QE<:QuEquation}) [¶](#method__start.1)
+#### start(mcwfensemble::QuMCWFEnsemble{QA<:AbstractQuArray{B<:AbstractBasis{S<:AbstractStructure}, T, N}}) [¶](#method__start.1)
+Input Parameters : QuMCWFEnsemble
+
+Returns the starting iterator state of the Ensemble
+
+
+*source:*
+[QuDynamics.jl/src/propmcwf.jl:38](https://github.com/amitjamadagni/QuDynamics.jl/tree/4e8fbe16f66de06394a2bd28a4cfd81993fb1586/src/propmcwf.jl#L38)
+
+---
+
+<a id="method__start.2" class="lexicon_definition"></a>
+#### start(prob::QuPropagator{QPM<:QuPropagatorMethod, QVM<:Union(AbstractQuArray{B<:AbstractBasis{S<:AbstractStructure}, T, 2}, AbstractQuArray{B<:AbstractBasis{S<:AbstractStructure}, T, 1}), QE<:QuEquation}) [¶](#method__start.2)
 Input Parameters : QuPropagator
 
 Returns the starting iterator state of the propagator method, i.e., the initial state of the system
 
 
 *source:*
-[QuDynamics.jl/src/propmachinery.jl:33](https://github.com/amitjamadagni/QuDynamics.jl/tree/96819bf75eb5059b3ba6719ee1fc193349d867d9/src/propmachinery.jl#L33)
+[QuDynamics.jl/src/propmachinery.jl:35](https://github.com/amitjamadagni/QuDynamics.jl/tree/4e8fbe16f66de06394a2bd28a4cfd81993fb1586/src/propmachinery.jl#L35)

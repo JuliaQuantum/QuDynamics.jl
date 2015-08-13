@@ -93,3 +93,37 @@ next_state_actual = expm(-im*QuDynamics.lindblad_op(sigmax, [lowerop(2)])*0.1)*v
 @test_approx_eq coeffs(vec(next_state_qexpokit_lmeq[1][2])) coeffs(next_state_actual)
 @test_approx_eq coeffs(vec(next_state_qexpokit_dm[1][2])) coeffs(next_state_actual)
 @test_approx_eq coeffs(vec(next_state_qexpokit_lmeq[1][2])) coeffs(next_state_actual)
+
+# TODO : QuBase.jl complex WIP. Issue 38. https://github.com/JuliaQuantum/QuBase.jl/pull/38
+Base.complex{B<:QuBase.OrthonormalBasis}(qarr::QuBase.AbstractQuArray{B}) = QuBase.similar_type(qarr)(complex(coeffs(qarr)), bases(qarr))
+
+# Monte Carlo Wave Function Method
+
+rho = init_state_dm
+rhos = Array(typeof(rho), length(tlist)-1)
+ps = Array(typeof(rho), length(tlist)-1)
+qumcwfen = QuMCWFEnsemble(complex(init_state), 1000)
+
+for i=1:length(tlist)-1
+    rhos[i] = complex(zeros(rho))
+    ps[i] = complex(zeros(rho))
+end
+
+for psi0 in qumcwfen
+    i = 1
+    mcwf = QuMCWF()
+    for (t,psi) in QuPropagator(hamiltonian, c_ops, psi0, tlist, mcwf)
+        rhos[i] = rhos[i] + (psi*psi')/length(qumcwfen)/norm(psi)^2
+        i = i + 1
+    end
+end
+
+prop_expm = QuPropagator(hamiltonian, c_ops, rho, tlist, QuExpmV())
+j = 1
+for (t, rhot) in prop_expm
+    ps[j] = rhot
+    j = j + 1
+end
+
+ind = findin(tlist, rand(tlist))[1]
+@test_approx_eq_eps coeffs(vec(rhos[ind])) coeffs(vec(ps[ind])) 1e-1
