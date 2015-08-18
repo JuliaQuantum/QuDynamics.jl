@@ -11,4 +11,5 @@ module QuDynamics
     include("propodesolvers.jl")
     include("propexpmsolvers.jl")
     include("propmcwf.jl")
+    export propagate
 end

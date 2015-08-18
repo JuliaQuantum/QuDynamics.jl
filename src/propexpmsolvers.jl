@@ -1,12 +1,16 @@
 abstract QuExponential <: QuPropagatorMethod
 
 @doc """
-Exponential solver, using Epokit.expmv
-Input Parameters :
-`options` : Dictionary to set the size of Krylov subspace and tolerance by using
-            keys as `:m` and `:tol`.
+Exponential solver, using Expokit.expmv
 
 Step Propagation using the exponential solver Expokit.expmv.
+
+### Fields :
+
+* options :: Dict
+
+Dictionary to set the size of Krylov subspace and tolerance by using
+keys as `:m` and `:tol`.
 """ ->
 immutable QuExpokit <: QuExponential
     options::Dict{Symbol, Any}
@@ -16,11 +20,15 @@ QuExpokit() = QuExpokit(Dict())
 
 @doc """
 Exponential solver, using ExpmV.expmv
-Input Parameters :
-`options` : Dictionary to set M, precision, shift, full_term by using
-            keys as `:M`, `:precision`, `:shift`, `:full_term`
 
 Step Propagation using the exponential solver ExpmV.expmv.
+
+### Fields :
+
+* options :: Dict
+
+Dictionary to set M, precision, shift, full_term by using
+keys as `:M`, `:precision`, `:shift`, `:full_term`
 """ ->
 immutable QuExpmV <: QuExponential
     options::Dict{Symbol, Any}

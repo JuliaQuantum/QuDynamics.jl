@@ -1,5 +1,5 @@
 @doc """
-Euler Method
+Euler method
 
 Step Propagation using the Euler formula.
 """ ->
@@ -16,13 +16,14 @@ end
 
 @doc """
 Krylov subspace Method
-Input Parameters :
-`options` : Dictionary to set the basis size with keyword NC.
 
-For ex :
-x = [:NC => basis_size]
-QuKrylov(x)
-Step Propagation using the Krylov subspace iterations.
+Step Propagation using the Krylov subspace method.
+
+### Fields :
+
+* options :: Dict
+
+  Dictionary to set the size of basis by using the key `:NC`.
 """ ->
 immutable QuKrylov <: QuPropagatorMethod
     options::Dict
@@ -31,13 +32,33 @@ end
 QuKrylov() = QuKrylov(@compat Dict(:NC=>10))
 
 @doc """
-Propagates to the next time state
-Input Parameters:
-`prob`             :  Method to be used
-`eq`               :  Quantum Equation type
-`t`                :  Time corresponding to the t_state
-`current_t`        :  Current time
-`current_qustate`  :  Quantum state corresponding to current time
+Propagate for different solver types.
+
+Method used to propagate one time step using the solver.
+
+### Arguments
+
+Inputs :
+* prob <: QuPropagatorMethod
+
+  Solver type (Method to be used  -> QuEuler, QuCrankNicolson,
+                       QuKrylov, QuODE45, QuODE78, QuODE23s,
+                       QuExpmV, QuExpokit, QuMCWF)
+* eq <: QuEquation
+
+  Equation type
+* t :: Float64
+
+  Final time
+* current_t :: Float64
+
+  Current time
+* current_qustate
+
+  Quantum state corresponding to current time
+
+Output :
+* Same type as current_qustate.
 """ ->
 function propagate(prob::QuEuler, eq::QuEquation, t, current_t, current_qustate)
     dt = t - current_t
@@ -94,6 +115,6 @@ function propagate(prob::QuKrylov, eq::QuEquation, t, current_t, current_qustate
     return CQST(reshape(coeffs(next_state), dims), bases(current_qustate))
 end
 
-export  QuEuler,
+export QuEuler,
      QuCrankNicolson,
      QuKrylov

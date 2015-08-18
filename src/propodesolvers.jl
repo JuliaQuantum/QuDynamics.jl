@@ -6,12 +6,16 @@ for qu_ode_type in keys(type_to_method_ode)
     method_name = type_to_method_ode[qu_ode_type]
     @eval  begin
         @doc """
-        ODE Method type $($(qu_ode_type))
-        Input Parameters :
-        `options` : Dictionary to set the relative tolerance and absolute tolerance by using
-                    keys as `:reltol` and `:abstol`.
+        ODE solver, using $($(qu_ode_type))
 
-        Step Propagation using the $($(method_name)) implementation from `ODE.jl`.
+        Step Propagation using the ode solver $($(method_name)).
+
+        ### Fields :
+
+        * options :: Dict
+
+        Dictionary to set the relative tolerance and absolute tolerance by using
+        keys as `:reltol` and `:abstol`.
         """ ->
         immutable $qu_ode_type <: QuODESolvers
             options::Dict{Symbol, Any}
@@ -21,7 +25,7 @@ for qu_ode_type in keys(type_to_method_ode)
 end
 
 for (qu_ode_type,ode_solver) in type_to_method_ode
-    @eval  begin
+    @eval begin
         function propagate(prob::$qu_ode_type, eq::QuEquation, t, current_t, current_qustate)
             op = operator(eq)
             dims = size(current_qustate)
