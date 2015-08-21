@@ -23,7 +23,7 @@ Output :
 
 
 *source:*
-[/home/amit/Downloads/SemVII/QuDynamics.jl/src/quequations.jl:98](https://github.com/amitjamadagni/QuDynamics.jl/tree/3f183cb47eff78ba998e0727c116db2f9e5dd369/src/quequations.jl#L98)
+[QuDynamics.jl/src/quequations.jl:98](https://github.com/JuliaQuantum/QuDynamics.jl/tree/becd9775c09c354e88049381321f944b6c7c5760/src/quequations.jl#L98)
 
 ---
 
@@ -43,7 +43,7 @@ Output :
 
 
 *source:*
-[/home/amit/Downloads/SemVII/QuDynamics.jl/src/quequations.jl:58](https://github.com/amitjamadagni/QuDynamics.jl/tree/3f183cb47eff78ba998e0727c116db2f9e5dd369/src/quequations.jl#L58)
+[QuDynamics.jl/src/quequations.jl:58](https://github.com/JuliaQuantum/QuDynamics.jl/tree/becd9775c09c354e88049381321f944b6c7c5760/src/quequations.jl#L58)
 
 ---
 
@@ -63,7 +63,7 @@ Output :
 
 
 *source:*
-[/home/amit/Downloads/SemVII/QuDynamics.jl/src/quequations.jl:29](https://github.com/amitjamadagni/QuDynamics.jl/tree/3f183cb47eff78ba998e0727c116db2f9e5dd369/src/quequations.jl#L29)
+[QuDynamics.jl/src/quequations.jl:29](https://github.com/JuliaQuantum/QuDynamics.jl/tree/becd9775c09c354e88049381321f944b6c7c5760/src/quequations.jl#L29)
 
 ---
 
@@ -99,7 +99,7 @@ Output :
 
 
 *source:*
-[/home/amit/Downloads/SemVII/QuDynamics.jl/src/propstepsolvers.jl:62](https://github.com/amitjamadagni/QuDynamics.jl/tree/3f183cb47eff78ba998e0727c116db2f9e5dd369/src/propstepsolvers.jl#L62)
+[QuDynamics.jl/src/propstepsolvers.jl:62](https://github.com/JuliaQuantum/QuDynamics.jl/tree/becd9775c09c354e88049381321f944b6c7c5760/src/propstepsolvers.jl#L62)
 
 ---
 
@@ -111,7 +111,7 @@ Step Propagation using the Crank Nicolson formula.
 
 
 *source:*
-[/home/amit/Downloads/SemVII/QuDynamics.jl/src/propstepsolvers.jl:13](https://github.com/amitjamadagni/QuDynamics.jl/tree/3f183cb47eff78ba998e0727c116db2f9e5dd369/src/propstepsolvers.jl#L13)
+[QuDynamics.jl/src/propstepsolvers.jl:13](https://github.com/JuliaQuantum/QuDynamics.jl/tree/becd9775c09c354e88049381321f944b6c7c5760/src/propstepsolvers.jl#L13)
 
 ---
 
@@ -123,7 +123,7 @@ Step Propagation using the Euler formula.
 
 
 *source:*
-[/home/amit/Downloads/SemVII/QuDynamics.jl/src/propstepsolvers.jl:5](https://github.com/amitjamadagni/QuDynamics.jl/tree/3f183cb47eff78ba998e0727c116db2f9e5dd369/src/propstepsolvers.jl#L5)
+[QuDynamics.jl/src/propstepsolvers.jl:5](https://github.com/JuliaQuantum/QuDynamics.jl/tree/becd9775c09c354e88049381321f944b6c7c5760/src/propstepsolvers.jl#L5)
 
 ---
 
@@ -142,7 +142,7 @@ keys as `:M`, `:precision`, `:shift`, `:full_term`
 
 
 *source:*
-[/home/amit/Downloads/SemVII/QuDynamics.jl/src/propexpmsolvers.jl:32](https://github.com/amitjamadagni/QuDynamics.jl/tree/3f183cb47eff78ba998e0727c116db2f9e5dd369/src/propexpmsolvers.jl#L32)
+[QuDynamics.jl/src/propexpmsolvers.jl:32](https://github.com/JuliaQuantum/QuDynamics.jl/tree/becd9775c09c354e88049381321f944b6c7c5760/src/propexpmsolvers.jl#L32)
 
 ---
 
@@ -161,7 +161,7 @@ keys as `:m` and `:tol`.
 
 
 *source:*
-[/home/amit/Downloads/SemVII/QuDynamics.jl/src/propexpmsolvers.jl:14](https://github.com/amitjamadagni/QuDynamics.jl/tree/3f183cb47eff78ba998e0727c116db2f9e5dd369/src/propexpmsolvers.jl#L14)
+[QuDynamics.jl/src/propexpmsolvers.jl:14](https://github.com/JuliaQuantum/QuDynamics.jl/tree/becd9775c09c354e88049381321f944b6c7c5760/src/propexpmsolvers.jl#L14)
 
 ---
 
@@ -179,7 +179,7 @@ Step Propagation using the Krylov subspace method.
 
 
 *source:*
-[/home/amit/Downloads/SemVII/QuDynamics.jl/src/propstepsolvers.jl:27](https://github.com/amitjamadagni/QuDynamics.jl/tree/3f183cb47eff78ba998e0727c116db2f9e5dd369/src/propstepsolvers.jl#L27)
+[QuDynamics.jl/src/propstepsolvers.jl:27](https://github.com/JuliaQuantum/QuDynamics.jl/tree/becd9775c09c354e88049381321f944b6c7c5760/src/propstepsolvers.jl#L27)
 
 ---
 
@@ -201,7 +201,7 @@ Lindblad Master Equation type
 
 
 *source:*
-[/home/amit/Downloads/SemVII/QuDynamics.jl/src/quequations.jl:75](https://github.com/amitjamadagni/QuDynamics.jl/tree/3f183cb47eff78ba998e0727c116db2f9e5dd369/src/quequations.jl#L75)
+[QuDynamics.jl/src/quequations.jl:75](https://github.com/JuliaQuantum/QuDynamics.jl/tree/becd9775c09c354e88049381321f944b6c7c5760/src/quequations.jl#L75)
 
 ---
 
@@ -217,7 +217,7 @@ Liouville von Neumann Equation type
 
 
 *source:*
-[/home/amit/Downloads/SemVII/QuDynamics.jl/src/quequations.jl:40](https://github.com/amitjamadagni/QuDynamics.jl/tree/3f183cb47eff78ba998e0727c116db2f9e5dd369/src/quequations.jl#L40)
+[QuDynamics.jl/src/quequations.jl:40](https://github.com/JuliaQuantum/QuDynamics.jl/tree/becd9775c09c354e88049381321f944b6c7c5760/src/quequations.jl#L40)
 
 ---
 
@@ -239,7 +239,7 @@ Step Propagation using the exponential solver Expokit.expmv.
 
 
 *source:*
-[/home/amit/Downloads/SemVII/QuDynamics.jl/src/propmcwf.jl:17](https://github.com/amitjamadagni/QuDynamics.jl/tree/3f183cb47eff78ba998e0727c116db2f9e5dd369/src/propmcwf.jl#L17)
+[QuDynamics.jl/src/propmcwf.jl:17](https://github.com/JuliaQuantum/QuDynamics.jl/tree/becd9775c09c354e88049381321f944b6c7c5760/src/propmcwf.jl#L17)
 
 ---
 
@@ -261,7 +261,7 @@ Ensemble of state, number of trajectories, decomposition based on the state.
 
 
 *source:*
-[/home/amit/Downloads/SemVII/QuDynamics.jl/src/propmcwf.jl:39](https://github.com/amitjamadagni/QuDynamics.jl/tree/3f183cb47eff78ba998e0727c116db2f9e5dd369/src/propmcwf.jl#L39)
+[QuDynamics.jl/src/propmcwf.jl:39](https://github.com/JuliaQuantum/QuDynamics.jl/tree/becd9775c09c354e88049381321f944b6c7c5760/src/propmcwf.jl#L39)
 
 ---
 
@@ -280,7 +280,7 @@ keys as `:reltol` and `:abstol`.
 
 
 *source:*
-[/home/amit/Downloads/SemVII/QuDynamics.jl/src/propodesolvers.jl:19](https://github.com/amitjamadagni/QuDynamics.jl/tree/3f183cb47eff78ba998e0727c116db2f9e5dd369/src/propodesolvers.jl#L19)
+[QuDynamics.jl/src/propodesolvers.jl:19](https://github.com/JuliaQuantum/QuDynamics.jl/tree/becd9775c09c354e88049381321f944b6c7c5760/src/propodesolvers.jl#L19)
 
 ---
 
@@ -299,7 +299,7 @@ keys as `:reltol` and `:abstol`.
 
 
 *source:*
-[/home/amit/Downloads/SemVII/QuDynamics.jl/src/propodesolvers.jl:19](https://github.com/amitjamadagni/QuDynamics.jl/tree/3f183cb47eff78ba998e0727c116db2f9e5dd369/src/propodesolvers.jl#L19)
+[QuDynamics.jl/src/propodesolvers.jl:19](https://github.com/JuliaQuantum/QuDynamics.jl/tree/becd9775c09c354e88049381321f944b6c7c5760/src/propodesolvers.jl#L19)
 
 ---
 
@@ -318,7 +318,7 @@ keys as `:reltol` and `:abstol`.
 
 
 *source:*
-[/home/amit/Downloads/SemVII/QuDynamics.jl/src/propodesolvers.jl:19](https://github.com/amitjamadagni/QuDynamics.jl/tree/3f183cb47eff78ba998e0727c116db2f9e5dd369/src/propodesolvers.jl#L19)
+[QuDynamics.jl/src/propodesolvers.jl:19](https://github.com/JuliaQuantum/QuDynamics.jl/tree/becd9775c09c354e88049381321f944b6c7c5760/src/propodesolvers.jl#L19)
 
 ---
 
@@ -346,7 +346,7 @@ Output :
 
 
 *source:*
-[/home/amit/Downloads/SemVII/QuDynamics.jl/src/propmachinery.jl:72](https://github.com/amitjamadagni/QuDynamics.jl/tree/3f183cb47eff78ba998e0727c116db2f9e5dd369/src/propmachinery.jl#L72)
+[QuDynamics.jl/src/propmachinery.jl:72](https://github.com/JuliaQuantum/QuDynamics.jl/tree/becd9775c09c354e88049381321f944b6c7c5760/src/propmachinery.jl#L72)
 
 ---
 
@@ -380,7 +380,7 @@ Output :
 
 
 *source:*
-[/home/amit/Downloads/SemVII/QuDynamics.jl/src/propmachinery.jl:29](https://github.com/amitjamadagni/QuDynamics.jl/tree/3f183cb47eff78ba998e0727c116db2f9e5dd369/src/propmachinery.jl#L29)
+[QuDynamics.jl/src/propmachinery.jl:29](https://github.com/JuliaQuantum/QuDynamics.jl/tree/becd9775c09c354e88049381321f944b6c7c5760/src/propmachinery.jl#L29)
 
 ---
 
@@ -396,7 +396,7 @@ Schrodinger Equation type
 
 
 *source:*
-[/home/amit/Downloads/SemVII/QuDynamics.jl/src/quequations.jl:11](https://github.com/amitjamadagni/QuDynamics.jl/tree/3f183cb47eff78ba998e0727c116db2f9e5dd369/src/quequations.jl#L11)
+[QuDynamics.jl/src/quequations.jl:11](https://github.com/JuliaQuantum/QuDynamics.jl/tree/becd9775c09c354e88049381321f944b6c7c5760/src/quequations.jl#L11)
 
 ## Internal
 
@@ -421,7 +421,7 @@ Output :
 
 
 *source:*
-[/home/amit/Downloads/SemVII/QuDynamics.jl/src/propmcwf.jl:102](https://github.com/amitjamadagni/QuDynamics.jl/tree/3f183cb47eff78ba998e0727c116db2f9e5dd369/src/propmcwf.jl#L102)
+[QuDynamics.jl/src/propmcwf.jl:102](https://github.com/JuliaQuantum/QuDynamics.jl/tree/becd9775c09c354e88049381321f944b6c7c5760/src/propmcwf.jl#L102)
 
 ---
 
@@ -443,7 +443,7 @@ Output :
 
 
 *source:*
-[/home/amit/Downloads/SemVII/QuDynamics.jl/src/propmachinery.jl:142](https://github.com/amitjamadagni/QuDynamics.jl/tree/3f183cb47eff78ba998e0727c116db2f9e5dd369/src/propmachinery.jl#L142)
+[QuDynamics.jl/src/propmachinery.jl:142](https://github.com/JuliaQuantum/QuDynamics.jl/tree/becd9775c09c354e88049381321f944b6c7c5760/src/propmachinery.jl#L142)
 
 ---
 
@@ -463,7 +463,7 @@ Output :
 
 
 *source:*
-[/home/amit/Downloads/SemVII/QuDynamics.jl/src/propmcwf.jl:119](https://github.com/amitjamadagni/QuDynamics.jl/tree/3f183cb47eff78ba998e0727c116db2f9e5dd369/src/propmcwf.jl#L119)
+[QuDynamics.jl/src/propmcwf.jl:119](https://github.com/JuliaQuantum/QuDynamics.jl/tree/becd9775c09c354e88049381321f944b6c7c5760/src/propmcwf.jl#L119)
 
 ---
 
@@ -483,7 +483,7 @@ Output :
 
 
 *source:*
-[/home/amit/Downloads/SemVII/QuDynamics.jl/src/propmcwf.jl:143](https://github.com/amitjamadagni/QuDynamics.jl/tree/3f183cb47eff78ba998e0727c116db2f9e5dd369/src/propmcwf.jl#L143)
+[QuDynamics.jl/src/propmcwf.jl:143](https://github.com/JuliaQuantum/QuDynamics.jl/tree/becd9775c09c354e88049381321f944b6c7c5760/src/propmcwf.jl#L143)
 
 ---
 
@@ -501,7 +501,7 @@ Output
 
 
 *source:*
-[/home/amit/Downloads/SemVII/QuDynamics.jl/src/quequations.jl:234](https://github.com/amitjamadagni/QuDynamics.jl/tree/3f183cb47eff78ba998e0727c116db2f9e5dd369/src/quequations.jl#L234)
+[QuDynamics.jl/src/quequations.jl:234](https://github.com/JuliaQuantum/QuDynamics.jl/tree/becd9775c09c354e88049381321f944b6c7c5760/src/quequations.jl#L234)
 
 ---
 
@@ -524,7 +524,7 @@ Output :
 
 
 *source:*
-[/home/amit/Downloads/SemVII/QuDynamics.jl/src/quequations.jl:119](https://github.com/amitjamadagni/QuDynamics.jl/tree/3f183cb47eff78ba998e0727c116db2f9e5dd369/src/quequations.jl#L119)
+[QuDynamics.jl/src/quequations.jl:119](https://github.com/JuliaQuantum/QuDynamics.jl/tree/becd9775c09c354e88049381321f944b6c7c5760/src/quequations.jl#L119)
 
 ---
 
@@ -544,7 +544,7 @@ Output :
 
 
 *source:*
-[/home/amit/Downloads/SemVII/QuDynamics.jl/src/quequations.jl:170](https://github.com/amitjamadagni/QuDynamics.jl/tree/3f183cb47eff78ba998e0727c116db2f9e5dd369/src/quequations.jl#L170)
+[QuDynamics.jl/src/quequations.jl:170](https://github.com/JuliaQuantum/QuDynamics.jl/tree/becd9775c09c354e88049381321f944b6c7c5760/src/quequations.jl#L170)
 
 ---
 
@@ -566,7 +566,7 @@ Output :
 
 
 *source:*
-[/home/amit/Downloads/SemVII/QuDynamics.jl/src/propmcwf.jl:81](https://github.com/amitjamadagni/QuDynamics.jl/tree/3f183cb47eff78ba998e0727c116db2f9e5dd369/src/propmcwf.jl#L81)
+[QuDynamics.jl/src/propmcwf.jl:81](https://github.com/JuliaQuantum/QuDynamics.jl/tree/becd9775c09c354e88049381321f944b6c7c5760/src/propmcwf.jl#L81)
 
 ---
 
@@ -592,7 +592,7 @@ Output :
 
 
 *source:*
-[/home/amit/Downloads/SemVII/QuDynamics.jl/src/propmachinery.jl:119](https://github.com/amitjamadagni/QuDynamics.jl/tree/3f183cb47eff78ba998e0727c116db2f9e5dd369/src/propmachinery.jl#L119)
+[QuDynamics.jl/src/propmachinery.jl:119](https://github.com/JuliaQuantum/QuDynamics.jl/tree/becd9775c09c354e88049381321f944b6c7c5760/src/propmachinery.jl#L119)
 
 ---
 
@@ -612,7 +612,7 @@ Output :
 
 
 *source:*
-[/home/amit/Downloads/SemVII/QuDynamics.jl/src/quequations.jl:219](https://github.com/amitjamadagni/QuDynamics.jl/tree/3f183cb47eff78ba998e0727c116db2f9e5dd369/src/quequations.jl#L219)
+[QuDynamics.jl/src/quequations.jl:219](https://github.com/JuliaQuantum/QuDynamics.jl/tree/becd9775c09c354e88049381321f944b6c7c5760/src/quequations.jl#L219)
 
 ---
 
@@ -632,7 +632,7 @@ Output :
 
 
 *source:*
-[/home/amit/Downloads/SemVII/QuDynamics.jl/src/quequations.jl:185](https://github.com/amitjamadagni/QuDynamics.jl/tree/3f183cb47eff78ba998e0727c116db2f9e5dd369/src/quequations.jl#L185)
+[QuDynamics.jl/src/quequations.jl:185](https://github.com/JuliaQuantum/QuDynamics.jl/tree/becd9775c09c354e88049381321f944b6c7c5760/src/quequations.jl#L185)
 
 ---
 
@@ -652,7 +652,7 @@ Output :
 
 
 *source:*
-[/home/amit/Downloads/SemVII/QuDynamics.jl/src/quequations.jl:202](https://github.com/amitjamadagni/QuDynamics.jl/tree/3f183cb47eff78ba998e0727c116db2f9e5dd369/src/quequations.jl#L202)
+[QuDynamics.jl/src/quequations.jl:202](https://github.com/JuliaQuantum/QuDynamics.jl/tree/becd9775c09c354e88049381321f944b6c7c5760/src/quequations.jl#L202)
 
 ---
 
@@ -672,7 +672,7 @@ Output :
 
 
 *source:*
-[/home/amit/Downloads/SemVII/QuDynamics.jl/src/propmcwf.jl:64](https://github.com/amitjamadagni/QuDynamics.jl/tree/3f183cb47eff78ba998e0727c116db2f9e5dd369/src/propmcwf.jl#L64)
+[QuDynamics.jl/src/propmcwf.jl:64](https://github.com/JuliaQuantum/QuDynamics.jl/tree/becd9775c09c354e88049381321f944b6c7c5760/src/propmcwf.jl#L64)
 
 ---
 
@@ -694,5 +694,4 @@ Output :
 
 
 *source:*
-[/home/amit/Downloads/SemVII/QuDynamics.jl/src/propmachinery.jl:93](https://github.com/amitjamadagni/QuDynamics.jl/tree/3f183cb47eff78ba998e0727c116db2f9e5dd369/src/propmachinery.jl#L93)
-
+[QuDynamics.jl/src/propmachinery.jl:93](https://github.com/JuliaQuantum/QuDynamics.jl/tree/becd9775c09c354e88049381321f944b6c7c5760/src/propmachinery.jl#L93)
