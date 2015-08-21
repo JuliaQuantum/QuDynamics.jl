@@ -2,11 +2,18 @@
 
 @doc """
 Quantum Monte-Carlo Wave Function Method
-Input Parameters :
-`eps`     : random number used in comparison of jtol and norm of the state drawn
-`options` : Dictionary to set the solver used to proagate the state generated using draw.
 
-Step Propagation using Quantum Monte-Carlo Wave Function Method.
+Step Propagation using the exponential solver Expokit.expmv.
+
+### Fields :
+
+* eps  :: Float64
+
+  Random number used to realize (quantum) jumps.
+
+* options :: Dict
+
+  Dictionary to set the solver used to proagate the state generated using `draw`.
 """ ->
 type QuMCWF <: QuPropagatorMethod
     eps::Float64
@@ -18,11 +25,17 @@ QuMCWF(options::Dict=Dict()) = QuMCWF(rand(), options)
 @doc """
 Ensemble of state, number of trajectories, decomposition based on the state.
 
-Fields :
+### Fields :
 
-`rho`   : state of the system
-`ntraj` : number of trajectories
-`decomp`: decomposition is of state `rho` if `rho` is a QuMatrix.
+* rho <: QuBase.AbstractQuArray
+
+  State of the system
+* ntraj :: Int
+
+  Number of trajectories
+* decomp
+
+  Decomposition is of state `rho` if `rho` is a `QuBase.AbstractQuMatrix`.
 """ ->
 type QuMCWFEnsemble{QA<:QuBase.AbstractQuArray}
     rho::QA
@@ -37,17 +50,34 @@ QuMCWFEnsemble{QV<:QuBase.AbstractQuVector}(psi::QV, ntraj=500) = QuMCWFEnsemble
 Base.length(en::QuMCWFEnsemble) = en.ntraj
 
 @doc """
-Input Parameters : QuMCWFEnsemble
+Iterator for QuMCWFEnsemble
 
-Returns the starting iterator state of the Ensemble
+Iterator `start` method of the Ensemble
+
+### Arguments
+
+Inputs :
+* mcwfensemble :: QuMCWFEnsemble
+
+Output :
+* 1
 """ ->
 Base.start(mcwfensemble::QuMCWFEnsemble) = 1
 
 @doc """
-Input Parameters : QuMCWFEnsemble and iterator state
+Iterator for QuMCWFEnsemble
 
-Returns the next state by using `draw` function
-to draw the next state and iterator state.
+Iterator `next` method of the Ensemble
+
+### Arguments
+
+Inputs :
+* mcwfensemble :: QuMCWFEnsemble
+
+* state :: Int
+
+Output :
+* State using `draw` and next state.
 """ ->
 function Base.next(mcwfensemble::QuMCWFEnsemble, i::Int)
     state = draw(mcwfensemble)
@@ -55,19 +85,37 @@ function Base.next(mcwfensemble::QuMCWFEnsemble, i::Int)
 end
 
 @doc """
-Input Parameters : QuMCWFEnsemble and iterator state
+Iterator for QuMCWFEnsemble
 
-Compares the iterator state with the number of trajectories and
-returns true or false depending on the comparison.
+Iterator `done` method of the Ensemble
+
+### Arguments
+
+Inputs :
+* mcwfensemble :: QuMCWFEnsemble
+
+* state ::  Int
+
+Output :
+* Compares the iterator state with the number of trajectories and
+  returns true or false depending on the comparison.
 """ ->
 function Base.done(mcwfensemble::QuMCWFEnsemble, i::Int)
     i > mcwfensemble.ntraj
 end
 
 @doc """
-Input Parameters : QuMCWFEnsemble which takes a AbstractQuMatrix as a parameter
+Method to draw a vector from the decomposition, using random number for selection.
 
-Returns state vector using the decomposition of AbstractQuMatrix.
+### Arguments
+
+Inputs :
+* mcwfensemble :: QuMCWFEnsemble{QuBase.AbstractQuMatrix}
+
+  Ensemble on which decomposition is performed
+
+Output :
+* QuArray with eigen vector from decomposition passed as an argument.
 """ ->
 function draw{QM<:QuBase.AbstractQuMatrix}(mcwfensemble::QuMCWFEnsemble{QM})
     r = rand() # draw random number from [0,1)
@@ -81,9 +129,17 @@ function draw{QM<:QuBase.AbstractQuMatrix}(mcwfensemble::QuMCWFEnsemble{QM})
 end
 
 @doc """
-Input Parameters : QuMCWFEnsemble which takes a AbstractQuVector as a parameter
+Method to draw a vector, which returns a copy of the vector instead of decomposing.
 
-Returns a copy of the state passed through the input parameter.
+### Arguments
+
+Inputs :
+* mcwfensemble :: QuMCWFEnsemble{QuBase.AbstractQuVector}
+
+  Ensemble which is constructed using a QuVector
+
+Output :
+* Copy of the QuVector.
 """ ->
 function draw{QV<:QuBase.AbstractQuVector}(mcwfensemble::QuMCWFEnsemble{QV})
     return copy(mcwfensemble.rho)
