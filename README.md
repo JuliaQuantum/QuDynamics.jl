@@ -147,6 +147,7 @@ The following discussions tend to provide an insight on the design of the intern
 1. [The GSoC blog updates](http://juliaquantum.github.io/news/index.html)
 2. Design and implementation related discussion [a](https://github.com/JuliaQuantum/JuliaQuantum.github.io/issues/20), [b](https://github.com/numfocus/gsoc/blob/7917b4fc08ce73ac74f8a2b9dd7929d994fc4282/2015/proposals/Amit.md)
 3. [Issues](https://github.com/JuliaQuantum/QuDynamics.jl/issues) and [Pull Requests](https://github.com/JuliaQuantum/QuDynamics.jl/pulls) are also good references which shed light on the development of the package.
+4. [Wiki](https://github.com/JuliaQuantum/QuDynamics.jl/wiki) page has a mention of the design and implementation related discussion.
 
 Contributions
 -----------
