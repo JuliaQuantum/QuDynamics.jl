@@ -133,9 +133,6 @@ To get the evolved state at the next time instant (here we get the state after t
 next_state = propagate(QuODE45(), QuSchrodingerEq(h), t[2], t[1], initial_state)
 println(next_state)
 ```
-In a more general setting we could pass `QuPropagatorState` as the second parameter to `next` in `Method-2`.
-
-Internally we have the iterator version of `QuPropagator`, where in, the `next` method is dispatched to `propagate` which is implemented for various solvers.
 
 For more examples and work cases, please refer to the [examples](https://github.com/JuliaQuantum/QuDynamics.jl/tree/master/examples) folder of the repo.
 
