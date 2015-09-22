@@ -42,13 +42,6 @@ This has to be added using
 Pkg.clone("https://github.com/JuliaQuantum/QuBase.jl.git")
 ```
 
-* **ODE.jl**
-
-This has been included but we require the latest master for some features. So perform a `checkout`
-```julia
-Pkg.checkout("ODE")
-```
-
 * **Expokit.jl**
 
 This has to be added using

@@ -12,4 +12,4 @@ script:
     - julia -e 'Pkg.clone("https://github.com/JuliaQuantum/QuBase.jl.git")';
     - julia -e 'Pkg.clone("https://github.com/marcusps/ExpmV.jl.git")';
     - julia -e 'Pkg.clone("https://github.com/acroy/Expokit.jl.git")';
-    - julia -e 'Pkg.clone(pwd()); Pkg.build("QuDynamics"); Pkg.checkout("ODE"); Pkg.test("QuDynamics")';
+    - julia -e 'Pkg.clone(pwd()); Pkg.build("QuDynamics"); Pkg.test("QuDynamics")';
