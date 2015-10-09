@@ -129,6 +129,9 @@ println(next_state)
 
 For more examples and work cases, please refer to the [examples](https://github.com/JuliaQuantum/QuDynamics.jl/tree/master/examples) folder of the repo.
 
+Note : Instances of `QuPropagator` can also be called by `QuStateEvolution`. Also the propagation of evolution operator can be
+evaluated using `QuEvolutionOp`.
+
 Discussions
 ----------
 
