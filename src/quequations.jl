@@ -1,3 +1,5 @@
+import Base: ndims
+
 abstract QuEquation
 
 @doc """
@@ -239,6 +241,10 @@ function eff_hamiltonian(lme::QuLindbladMasterEq)
     end
     return heff
 end
+
+Base.ndims(eq::QuSchrodingerEq) = ndims(eq.hamiltonian)
+Base.ndims(eq::QuLiouvillevonNeumannEq) = ndims(eq.liouvillian)
+Base.ndims(eq::QuLindbladMasterEq) = ndims(eq.lindblad)
 
 export QuEquation,
       QuSchrodingerEq,

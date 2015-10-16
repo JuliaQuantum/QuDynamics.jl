@@ -32,7 +32,13 @@ immutable QuStateEvolution{QPM<:QuPropagatorMethod, QVM<:@compat(Union{QuBase.Ab
     init_state::QVM
     tlist
     method::QPM
-    QuStateEvolution(eq, init_state, tlist, method) = new(eq, init_state, tlist, method)
+    function QuStateEvolution(eq, init_state, tlist, method)
+        if size(eq)[1]^2 == size(vec(init_state), 1) ||  size(eq)[1] == size(vec(init_state), 1)
+            new(eq, init_state, tlist, method)
+        else
+            error("Operator(Hamiltonian related) and initial state incompatible")
+        end
+    end
 end
 
 QuStateEvolution{QPM<:QuPropagatorMethod, QV<:QuBase.AbstractQuVector}(eq::QuSchrodingerEq, init_state::QV, tlist, method::QPM) = QuStateEvolution{QPM,QV,QuSchrodingerEq}(eq, init_state, tlist, method)
