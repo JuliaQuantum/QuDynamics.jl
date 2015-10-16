@@ -1,3 +1,5 @@
+import Base: size
+
 abstract QuEquation
 
 @doc """
@@ -239,6 +241,10 @@ function eff_hamiltonian(lme::QuLindbladMasterEq)
     end
     return heff
 end
+
+Base.size(eq::QuSchrodingerEq) = size(eq.hamiltonian)
+Base.size(eq::QuLiouvillevonNeumannEq) = size(eq.liouvillian)
+Base.size(eq::QuLindbladMasterEq) = size(eq.lindblad)
 
 export QuEquation,
       QuSchrodingerEq,
