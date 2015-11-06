@@ -47,7 +47,8 @@ QuStateEvolution{QPM<:QuPropagatorMethod, QM<:QuBase.AbstractQuMatrix}(eq::QuLin
 
 QuStateEvolution{QPM<:QuPropagatorMethod, QM<:QuBase.AbstractQuMatrix, COT<:QuBase.AbstractQuMatrix}(hamiltonian::QuBase.AbstractQuMatrix, collapse_ops::Vector{COT}, init_state::QM, tlist, method::QPM) = QuStateEvolution{QPM,QM,QuLindbladMasterEq}(QuLindbladMasterEq(hamiltonian,collapse_ops), init_state, tlist, method)
 
-QuStateEvolution{QPM<:QuPropagatorMethod, QV<:QuBase.AbstractQuVector, COT<:QuBase.AbstractQuMatrix}(hamiltonian::QuBase.AbstractQuMatrix, collapse_ops::Vector{COT}, init_state::QV, tlist, method::QPM) = QuStateEvolution{QPM,QV,QuLindbladMasterEq}(QuLindbladMasterEq(hamiltonian,collapse_ops), init_state, tlist, method)
+# QuLindbladMasterEqUncached is used as the construction of Lindblad operator is not required for every tracjectory.
+QuStateEvolution{QPM<:QuPropagatorMethod, QV<:QuBase.AbstractQuVector, COT<:QuBase.AbstractQuMatrix}(hamiltonian::QuBase.AbstractQuMatrix, collapse_ops::Vector{COT}, init_state::QV, tlist, method::QPM) = QuStateEvolution{QPM,QV,QuLindbladMasterEq}(QuLindbladMasterEqUncached(hamiltonian,collapse_ops), init_state, tlist, method)
 
 # QuPropagator and QuStateEvolution types are the same.
 typealias QuPropagator QuStateEvolution

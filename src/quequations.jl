@@ -1,4 +1,7 @@
-abstract QuEquation
+# CF - Cache Flag, can be set to either `1` or `0`. `1` implies caching, `0` the otherwise.
+# for a more clearer picture, look at the methods
+# `operator(qu_eq::QuLindbladMasterEq{1})` and `operator(qu_eq::QuLindbladMasterEq{0})`
+abstract QuEquation{CF}
 
 @doc """
 Schrodinger Equation type
@@ -9,7 +12,7 @@ Schrodinger Equation type
 
   Hamiltonian of the system is the only field for the type.
 """ ->
-immutable QuSchrodingerEq{H<:QuBase.AbstractQuMatrix} <: QuEquation
+immutable QuSchrodingerEq{H<:QuBase.AbstractQuMatrix} <: QuEquation{1}
     hamiltonian::H
     QuSchrodingerEq(hamiltonian) = new(hamiltonian)
 end
@@ -38,7 +41,7 @@ Liouville von Neumann Equation type
 
   Liouvillian of the system is the only field for the type.
 """ ->
-immutable QuLiouvillevonNeumannEq{H<:QuBase.AbstractQuMatrix} <: QuEquation
+immutable QuLiouvillevonNeumannEq{H<:QuBase.AbstractQuMatrix} <: QuEquation{1}
     liouvillian::H
     QuLiouvillevonNeumannEq(liouvillian) = new(liouvillian)
 end
@@ -73,7 +76,9 @@ Lindblad Master Equation type
 
   Collapse operators
 """ ->
-immutable QuLindbladMasterEq{L<:QuBase.AbstractQuMatrix, H<:QuBase.AbstractQuMatrix, V<:QuBase.AbstractQuMatrix} <: QuEquation
+# immutable QuLindbladMasterEq{CF, L<:@compat(Union{QuBase.AbstractQuMatrix, Nothing}), H<:QuBase.AbstractQuMatrix, V<:QuBase.AbstractQuMatrix} <: QuEquation{CF}
+# (Use this for running the benchmarks on version < 0.4)
+immutable QuLindbladMasterEq{CF, L<:@compat(Union{QuBase.AbstractQuMatrix, Void}), H<:QuBase.AbstractQuMatrix, V<:QuBase.AbstractQuMatrix} <: QuEquation{CF}
     lindblad::L
     hamiltonian::H
     collapse_ops::Vector{V}
@@ -81,7 +86,8 @@ immutable QuLindbladMasterEq{L<:QuBase.AbstractQuMatrix, H<:QuBase.AbstractQuMat
 end
 
 @doc """
-Lindblad Master Equation method
+Lindblad Master Equation method, cached version creates and stores
+the lindblad operator construct.
 
 ### Arguments
 
@@ -98,7 +104,30 @@ Output :
 """ ->
 function QuLindbladMasterEq{H<:QuBase.AbstractQuMatrix, V<:QuBase.AbstractQuMatrix}(hamiltonian::H, collapse_ops::Vector{V})
     lop = lindblad_op(hamiltonian, collapse_ops)
-    QuLindbladMasterEq{typeof(lop),H,V}(lop, hamiltonian, collapse_ops)
+    QuLindbladMasterEq{1,typeof(lop),H,V}(lop, hamiltonian, collapse_ops)
+end
+
+@doc """
+Lindblad Master Equation method, uncache version. Used in construction
+of `QuPropagator` w.r.t MCWF method, as lindblad operator construct is
+not required for every tracjetory.
+
+### Arguments
+
+Inputs :
+* hamiltonian <: QuBase.AbstractQuMatrix
+
+  Hamiltonian of the system
+* collapse_ops :: Vector{QuBase.AbstractQuMatrix}
+
+  Collapse operators
+
+Output :
+* QuLindbladMasterEq type construct.
+""" ->
+# QuLindbladMasterEq{0,Nothing,H,V}(nothing, hamiltonian, collapse_ops) (Use this for running the benchmarks on version < 0.4)
+function QuLindbladMasterEqUncached{H<:QuBase.AbstractQuMatrix, V<:QuBase.AbstractQuMatrix}(hamiltonian::H, collapse_ops::Vector{V})
+    QuLindbladMasterEq{0,Void,H,V}(nothing, hamiltonian, collapse_ops)
 end
 
 @doc """
@@ -205,20 +234,39 @@ function operator(qu_eq::QuSchrodingerEq)
 end
 
 @doc """
-Lindblad operator of the QuLindbladMasterEq type.
+Lindblad operator of the QuLindbladMasterEq type, cached version.
+To be used when `QuLindbladMasterEq` is in use.
 
 ### Arguments
 
 Inputs :
-* qu_eq :: QuLindbladMasterEq
+* qu_eq :: QuLindbladMasterEq{1}
 
   Lindblad Master Equation type
 
 Output :
 * Lindblad operator of the system
 """ ->
-function operator(qu_eq::QuLindbladMasterEq)
+function operator(qu_eq::QuLindbladMasterEq{1})
     return qu_eq.lindblad
+end
+
+@doc """
+Lindblad operator of the QuLindbladMasterEq type, uncached version.
+To be used in when `QuLindbladMasterEqUncached` is in use.
+
+### Arguments
+
+Inputs :
+* qu_eq :: QuLindbladMasterEq{0}
+
+  Lindblad Master Equation type
+
+Output :
+* Lindblad operator of the system
+""" ->
+function operator(qu_eq::QuLindbladMasterEq{0})
+    return lindblad_op(qu_eq.hamiltonian, qu_eq.collapse_ops)
 end
 
 @doc """
@@ -243,4 +291,5 @@ end
 export QuEquation,
       QuSchrodingerEq,
       QuLiouvillevonNeumannEq,
-      QuLindbladMasterEq
+      QuLindbladMasterEq,
+      QuLindbladMasterEqUncached
