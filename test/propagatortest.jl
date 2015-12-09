@@ -125,7 +125,7 @@ for (t, rhot) in prop_expm
     j = j + 1
 end
 
-ind = findin(tlist, rand(tlist))[1]
+ind=rand(1:(length(tlist)-1))
 @test_approx_eq_eps coeffs(vec(rhos[ind])) coeffs(vec(ps[ind])) 1e-1
 
 # tests for  evolution opeator.
@@ -133,3 +133,7 @@ evolved_state = coeffs(propagate(QuExpokit(), QuSchrodingerEq(hamiltonian), tlis
 @test_approx_eq coeffs(QuEvolutionOp(sigmax, 0.1)*init_state) evolved_state
 @test_approx_eq coeffs(QuEvolutionOp(sigmax, tlist[5], tlist[4])*init_state) evolved_state
 @test_approx_eq coeffs(QuEvolutionOp(QuSchrodingerEq(sigmax), tlist[5], tlist[4])*init_state) evolved_state
+
+# caching and uncached version testing
+@assert QuLindbladMasterEqUncached(sigmax, [sigmax]).lindblad == nothing
+@assert QuLindbladMasterEq(sigmax, [sigmax]).lindblad == QuDynamics.operator(QuLindbladMasterEqUncached(sigmax,  [sigmax]))
