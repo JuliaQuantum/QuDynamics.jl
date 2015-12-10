@@ -13,3 +13,7 @@ script:
     - julia -e 'Pkg.clone("https://github.com/marcusps/ExpmV.jl.git")';
     - julia -e 'Pkg.clone("https://github.com/acroy/Expokit.jl.git")';
     - julia -e 'Pkg.clone(pwd()); Pkg.build("QuDynamics"); Pkg.test("QuDynamics")';
+matrix:
+  allow_failures: # import normalize in QuBase as this is in Base in v 0.5.
+    - julia: nightly
+  fast_finish: true
