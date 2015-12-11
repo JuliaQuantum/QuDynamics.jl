@@ -4,6 +4,7 @@ module QuDynamics
     using ODE
     using Expokit
     using ExpmV
+    using FastAnonymous
     VERSION < v"0.4-" && using Docile
     include("quequations.jl")
     include("propmachinery.jl")
