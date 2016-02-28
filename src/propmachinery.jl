@@ -35,6 +35,10 @@ immutable QuStateEvolution{QPM<:QuPropagatorMethod, QVM<:@compat(Union{QuBase.Ab
     QuStateEvolution(eq, init_state, tlist, method) = new(eq, init_state, tlist, method)
 end
 
+QuStateEvolution{QPM<:QuPropagatorMethod, QV<:QuBase.AbstractQuVector, QE<: QuEquation}(eq::QE, init_state::QV, tlist, method::QPM) = QuStateEvolution{QPM,QV,QE}(eq, init_state, tlist, method)
+
+QuStateEvolution{QPM<:QuPropagatorMethod, QM<:QuBase.AbstractQuMatrix, QE<: QuEquation}(eq::QE, init_state::QM, tlist, method::QPM) = QuStateEvolution{QPM,QM,QE}(eq, init_state, tlist, method)
+
 QuStateEvolution{QPM<:QuPropagatorMethod, QV<:QuBase.AbstractQuVector}(eq::QuSchrodingerEq, init_state::QV, tlist, method::QPM) = QuStateEvolution{QPM,QV,QuSchrodingerEq}(eq, init_state, tlist, method)
 
 QuStateEvolution{QPM<:QuPropagatorMethod, QV<:QuBase.AbstractQuVector}(hamiltonian::QuBase.AbstractQuMatrix, init_state::QV,  tlist, method::QPM) = QuStateEvolution{QPM,QV,QuSchrodingerEq}(QuSchrodingerEq(hamiltonian),init_state, tlist, method)

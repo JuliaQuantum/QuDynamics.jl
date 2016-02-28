@@ -63,7 +63,7 @@ Output :
 function propagate(prob::QuEuler, eq::QuEquation, t, current_t, current_qustate)
     dt = t - current_t
     dims = size(current_qustate)
-    op = operator(eq)
+    op = operator(eq, t)
     next_state = (eye(op)-im*op*dt)*vec(current_qustate)
     CQST = QuBase.similar_type(current_qustate)
     return CQST(reshape(coeffs(next_state), dims), bases(current_qustate))
@@ -72,7 +72,7 @@ end
 function propagate(prob::QuCrankNicolson, eq::QuEquation, t, current_t, current_qustate)
     dt = t - current_t
     dims = size(current_qustate)
-    op = operator(eq)
+    op = operator(eq, t)
     uni = eye(op)-im*op*dt/2
     next_state = \(uni', uni*vec(current_qustate))
     CQST = QuBase.similar_type(current_qustate)
@@ -93,7 +93,7 @@ function propagate(prob::QuKrylov, eq::QuEquation, t, current_t, current_qustate
     @compat sizehint!(alpha, N)
     beta = Array(Complex{Float64},0)
     @compat sizehint!(beta, N+1)
-    op = operator(eq)
+    op = operator(eq, t)
     push!(beta,0.)
     for i=2:N
         w = op*v[i]

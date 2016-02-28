@@ -27,7 +27,7 @@ end
 for (qu_ode_type,ode_solver) in type_to_method_ode
     @eval begin
         function propagate(prob::$qu_ode_type, eq::QuEquation, t, current_t, current_qustate)
-            op = operator(eq)
+            op = operator(eq, t)
             dims = size(current_qustate)
             # Convert the current_qustate to complex as it might result in a Inexact Error. After complex is in QuBase.jl (PR #38)
             # we could just do a complex(vec(current_qustate)) avoiding the coeffs(coeffs(vec(current_qustate))).

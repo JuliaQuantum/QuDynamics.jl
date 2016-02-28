@@ -39,7 +39,7 @@ QuExpmV() = QuExpmV(Dict())
 function propagate(prob::QuExpokit, eq::QuEquation, t, current_t, current_qustate)
     dt = t - current_t
     dims = size(current_qustate)
-    next_state = Expokit.expmv(dt, -im*coeffs(operator(eq)), coeffs(vec(current_qustate)), m = get(prob.options, :m, 30), tol = get(prob.options, :tol, 1e-7))
+    next_state = Expokit.expmv(dt, -im*coeffs(operator(eq, t)), coeffs(vec(current_qustate)), m = get(prob.options, :m, 30), tol = get(prob.options, :tol, 1e-7))
     CQST = QuBase.similar_type(current_qustate)
     return CQST(reshape(next_state, dims), bases(current_qustate))
 end
@@ -47,7 +47,7 @@ end
 function propagate(prob::QuExpmV, eq::QuEquation, t, current_t, current_qustate)
     dt = t - current_t
     dims = size(current_qustate)
-    next_state = ExpmV.expmv(dt, -im*coeffs(operator(eq)), coeffs(vec(current_qustate)), M = get(prob.options, :M, []), prec = get(prob.options, :prec, "double"),
+    next_state = ExpmV.expmv(dt, -im*coeffs(operator(eq, t)), coeffs(vec(current_qustate)), M = get(prob.options, :M, []), prec = get(prob.options, :prec, "double"),
                             shift = get(prob.options, :shift, false), full_term = get(prob.options, :full_term, false))
     CQST = QuBase.similar_type(current_qustate)
     return CQST(reshape(next_state, dims), bases(current_qustate))
