@@ -2,6 +2,7 @@ QuDynamics.jl
 ============
 
 [![Build Status](https://travis-ci.org/JuliaQuantum/QuDynamics.jl.png?branch=master)](https://travis-ci.org/JuliaQuantum/QuDynamics.jl)
+[![Coverage Status](https://coveralls.io/repos/github/JuliaQuantum/QuDynamics.jl/badge.svg?branch=master)](https://coveralls.io/github/JuliaQuantum/QuDynamics.jl?branch=master)
 
 A [JuliaQuantum](http://juliaquantum.github.io/) package for solving dynamical equations in quantum mechanics.
 
