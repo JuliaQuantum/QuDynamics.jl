@@ -1,3 +1,4 @@
+begin
 # Initializing the system
 
 # Hamiltonian of the system
@@ -137,3 +138,4 @@ evolved_state = coeffs(propagate(QuExpokit(), QuSchrodingerEq(hamiltonian), tlis
 # caching and uncached version testing
 @assert QuLindbladMasterEqUncached(sigmax, [sigmax]).lindblad == nothing
 @assert QuLindbladMasterEq(sigmax, [sigmax]).lindblad == QuDynamics.operator(QuLindbladMasterEqUncached(sigmax,  [sigmax]))
+end

@@ -11,5 +11,10 @@ module QuDynamics
     include("propodesolvers.jl")
     include("propexpmsolvers.jl")
     include("propmcwf.jl")
+    module QuTiP
+    using ..QuBase
+    using ..QuDynamics
+    include("qutipinterface.jl")
+    end
     export propagate
 end
