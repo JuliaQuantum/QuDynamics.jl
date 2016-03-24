@@ -1,10 +1,10 @@
 QuDynamics.jl
 ============
 
-[![Join the chat at https://gitter.im/JuliaQuantum/QuDynamics.jl](https://badges.gitter.im/JuliaQuantum/QuDynamics.jl.svg)](https://gitter.im/JuliaQuantum/QuDynamics.jl?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-
 [![Build Status](https://travis-ci.org/JuliaQuantum/QuDynamics.jl.png?branch=master)](https://travis-ci.org/JuliaQuantum/QuDynamics.jl)
 [![Coverage Status](https://coveralls.io/repos/github/JuliaQuantum/QuDynamics.jl/badge.svg?branch=master)](https://coveralls.io/github/JuliaQuantum/QuDynamics.jl?branch=master)
+[![Join the chat at https://gitter.im/JuliaQuantum/QuDynamics.jl](https://badges.gitter.im/JuliaQuantum/QuDynamics.jl.svg)](https://gitter.im/JuliaQuantum/QuDynamics.jl?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 
 A [JuliaQuantum](http://juliaquantum.github.io/) package for solving dynamical equations in quantum mechanics.
 
