@@ -1,3 +1,5 @@
+import ProgressMeter
+
 abstract QuPropagatorMethod
 
 @doc """
@@ -173,29 +175,58 @@ QuEvolutionOp{QE<:QuEquation}(eq::QE, dt::Float64) = QuEvolutionOp(operator(eq),
 
 QuEvolutionOp{QE<:QuEquation}(eq::QE, tf::Float64, ti::Float64) = QuEvolutionOp(eq, tf-ti)
 
-function Base.show(io::IO, qprop::QuPropagator)
-    field_params = fieldnames(qprop.eq)
-    println(io, "Summarizing the system :")
-    if :lindblad in field_params && :hamiltonian in field_params
-        println(io, "Equation type : $(typeof(qprop.eq))")
-        println(io, "Size of the Lindblad operator of the system : $(size(coeffs(qprop.eq.lindblad)))")
-        println(io, "Size of the Hamiltonian of the system : $(size(coeffs(qprop.eq.hamiltonian)))")
-        println(io, "Number of collapse operators : $(length(qprop.eq.collapse_ops))")
-        println(io, "Size of the Density matrix : $(size(coeffs(qprop.init_state)))")
-    elseif :hamiltonian in field_params
-        println(io, "Equation type : $(typeof(qprop.eq))")
-        println(io, "Size of the Hamiltonian of the system : $(size(coeffs(qprop.eq.hamiltonian)))")
-        println(io, "Size of the Initial state : $(size(coeffs(qprop.init_state)))")
-    elseif :liouvillian in field_params
-        println(io, "Equation type : $(typeof(qprop.eq))")
-        println(io, "Size of the Liouvillian of the system : $(size(coeffs(qprop.eq.liouvillian)))")
-        println(io, "Size of the Density matrix : $(size(coeffs(qprop.init_state)))")
+macro showprogress(qprop)
+    return quote
+        n = length(@eval $qprop.tlist)
+        evolved_states = Array(QuBase.AbstractQuArray, n-1)
+        p = ProgressMeter.Progress(n, 1, "Computation of evolved states in progress ... ", 50)
+        i = 1
+        for (t, psi) in $(esc(qprop))
+            evolved_states[i] = psi
+            i = i + 1
+            ProgressMeter.next!(p)
+        end
+        evolved_states
     end
-    println(io, "Time steps used : $(qprop.tlist)")
-    println(io, "Solver used : $(qprop.method)")
+end
+
+macro showprogress_trace(qprop)
+    return quote
+        n = length(@eval $qprop.tlist)
+        trace_evolved_states = Array(Complex128, n-1)
+        p = ProgressMeter.Progress(n, 1, "Computation of the trace of evolved states in progress ... ", 50)
+        i = 1
+        for (t, psi) in $(esc(qprop))
+            trace_evolved_states[i] = trace(psi)
+            i = i + 1
+            ProgressMeter.next!(p)
+        end
+        trace_evolved_states
+    end
+end
+
+macro showprogress_expectation(qprop, expectation_operators)
+    return quote
+        n = length(@eval $qprop.tlist)
+        m = length(@eval $expectation_operators)
+        expectation_values = zeros(Complex128, n, m)
+        p = ProgressMeter.Progress(n, 1, "Computation of expectation values with respect to evolved states in progress ... ", 50)
+        i = 1
+        for (t, psi) in $(esc(qprop))
+            for j in 1:m
+                expectation_values[i, j] = expectationvalue(psi, @eval $expectation_operators[m])
+            end
+            i = i + 1
+            ProgressMeter.next!(p)
+        end
+        expectation_values
+    end
 end
 
 export  QuStateEvolution,
       QuPropagator,
       QuEvolutionOp,
-      QuPropagatorState
+      QuPropagatorState,
+      @showprogress,
+      @showprogress_trace,
+      @showprogress_expectation
