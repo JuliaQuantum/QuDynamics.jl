@@ -6,7 +6,6 @@ USER root
 
 # Add Julia dependencies
 RUN apt-get update && apt-get install -y wget && apt-get clean
-RUN pip install --upgrade matplotlib
 
 USER main
 
