@@ -223,6 +223,28 @@ macro showprogress_expectation(qprop, expectation_operators)
     end
 end
 
+function Base.show(io::IO, qprop::QuPropagator)
+    field_params = fieldnames(qprop.eq)
+    println(io, "Summarizing the system :")
+    if :lindblad in field_params && :hamiltonian in field_params
+        println(io, "Equation type : $(typeof(qprop.eq))")
+        println(io, "Size of the Lindblad operator of the system : $(size(coeffs(qprop.eq.lindblad)))")
+        println(io, "Size of the Hamiltonian of the system : $(size(coeffs(qprop.eq.hamiltonian)))")
+        println(io, "Number of collapse operators : $(length(qprop.eq.collapse_ops))")
+        println(io, "Size of the Density matrix : $(size(coeffs(qprop.init_state)))")
+    elseif :hamiltonian in field_params
+        println(io, "Equation type : $(typeof(qprop.eq))")
+        println(io, "Size of the Hamiltonian of the system : $(size(coeffs(qprop.eq.hamiltonian)))")
+        println(io, "Size of the Initial state : $(size(coeffs(qprop.init_state)))")
+    elseif :liouvillian in field_params
+        println(io, "Equation type : $(typeof(qprop.eq))")
+        println(io, "Size of the Liouvillian of the system : $(size(coeffs(qprop.eq.liouvillian)))")
+        println(io, "Size of the Density matrix : $(size(coeffs(qprop.init_state)))")
+    end
+    println(io, "Time steps used : $(qprop.tlist)")
+    println(io, "Solver used : $(qprop.method)")
+end
+
 export  QuStateEvolution,
       QuPropagator,
       QuEvolutionOp,
