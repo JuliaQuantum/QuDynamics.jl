@@ -208,11 +208,14 @@ Inputs :
 * qu_eq :: QuLiouvillevonNeumannEq
 
   Liouville von Neumann Equation type
+* t
+
+  Time parameter to facilitate time dependent operations.
 
 Output :
 * Liouvillian of the system
 """ ->
-function operator(qu_eq::QuLiouvillevonNeumannEq)
+function operator(qu_eq::QuLiouvillevonNeumannEq, t=0)
     return qu_eq.liouvillian
 end
 
@@ -225,11 +228,14 @@ Inputs :
 * qu_eq :: QuSchrodingerEq
 
   Schrodinger Equation type
+* t
+
+  Time parameter to facilitate time dependent operations.
 
 Output :
 * Hamiltonian of the system
 """ ->
-function operator(qu_eq::QuSchrodingerEq)
+function operator(qu_eq::QuSchrodingerEq, t=0)
     return qu_eq.hamiltonian
 end
 
@@ -243,11 +249,14 @@ Inputs :
 * qu_eq :: QuLindbladMasterEq{1}
 
   Lindblad Master Equation type
+* t
+
+  Time parameter to facilitate time dependent operations.
 
 Output :
 * Lindblad operator of the system
 """ ->
-function operator(qu_eq::QuLindbladMasterEq{1})
+function operator(qu_eq::QuLindbladMasterEq{1}, t=0)
     return qu_eq.lindblad
 end
 
@@ -261,11 +270,14 @@ Inputs :
 * qu_eq :: QuLindbladMasterEq{0}
 
   Lindblad Master Equation type
+* t
+
+  Time parameter to facilitate time dependent operations.
 
 Output :
 * Lindblad operator of the system
 """ ->
-function operator(qu_eq::QuLindbladMasterEq{0})
+function operator(qu_eq::QuLindbladMasterEq{0}, t=0)
     return lindblad_op(qu_eq.hamiltonian, qu_eq.collapse_ops)
 end
 

@@ -139,6 +139,8 @@ For more examples and work cases, please refer to the [examples](https://github.
 Note : Instances of `QuPropagator` can also be called by `QuStateEvolution`. Also the propagation of evolution operator can be
 evaluated using `QuEvolutionOp`.
 
+Update : Time dependence functionality has been integrated. Please refer to this [Wiki](https://github.com/JuliaQuantum/QuDynamics.jl/wiki/Time-Dependent-Systems) for details.
+
 Discussions
 ----------
 
