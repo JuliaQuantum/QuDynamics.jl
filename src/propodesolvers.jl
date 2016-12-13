@@ -31,10 +31,9 @@ for (qu_ode_type,ode_solver) in type_to_method_ode
             dims = size(current_qustate)
             # Convert the current_qustate to complex as it might result in a Inexact Error. After complex is in QuBase.jl (PR #38)
             # we could just do a complex(vec(current_qustate)) avoiding the coeffs(coeffs(vec(current_qustate))).
-            next_state = $ode_solver((t,y)-> -im*coeffs(op)*y, complex(coeffs(vec(current_qustate))), [current_t, t], points=:specified,
+            next_state = $ode_solver((t,y)-> -im*op*y, complex(vec(current_qustate)), [current_t, t], points=:specified,
                                   reltol = get(prob.options, :reltol, 1.0e-5), abstol = get(prob.options, :abstol, 1.0e-8))[2][end]
-            CQST = QuBase.similar_type(current_qustate)
-            return CQST(reshape(next_state, dims), bases(current_qustate))
+            return reshape(next_state, dims)
         end
     end
 end

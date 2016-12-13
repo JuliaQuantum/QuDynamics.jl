@@ -4,4 +4,4 @@ using Base.Test
 using Compat
 
 include("propagatortest.jl")
-include("qutipinterfacetest.jl")
+# include("qutipinterfacetest.jl")

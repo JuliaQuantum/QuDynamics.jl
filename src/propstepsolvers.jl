@@ -65,8 +65,7 @@ function propagate(prob::QuEuler, eq::QuEquation, t, current_t, current_qustate)
     dims = size(current_qustate)
     op = operator(eq, t)
     next_state = (eye(op)-im*op*dt)*vec(current_qustate)
-    CQST = QuBase.similar_type(current_qustate)
-    return CQST(reshape(coeffs(next_state), dims), bases(current_qustate))
+    return reshape(next_state, dims)
 end
 
 function propagate(prob::QuCrankNicolson, eq::QuEquation, t, current_t, current_qustate)
@@ -75,8 +74,7 @@ function propagate(prob::QuCrankNicolson, eq::QuEquation, t, current_t, current_
     op = operator(eq, t)
     uni = eye(op)-im*op*dt/2
     next_state = \(uni', uni*vec(current_qustate))
-    CQST = QuBase.similar_type(current_qustate)
-    return CQST(reshape(coeffs(next_state), dims), bases(current_qustate))
+    return reshape(next_state, dims)
 end
 
 function propagate(prob::QuKrylov, eq::QuEquation, t, current_t, current_qustate)
@@ -85,18 +83,23 @@ function propagate(prob::QuKrylov, eq::QuEquation, t, current_t, current_qustate
     cqs = vec(current_qustate)
     basis_size = get(prob.options,:NC, length(cqs))
     N = min(basis_size, length(cqs))
-    v = Array(typeof(cqs),0)
+    v = Array(Any,0)
     @compat sizehint!(v, N+1)
-    push!(v,zeros(cqs))
+    push!(v,zeros(Complex{Float64}, cqs))
     push!(v,cqs)
+    println(v)
     alpha = Array(Complex{Float64},0)
     @compat sizehint!(alpha, N)
+    println(alpha)
     beta = Array(Complex{Float64},0)
     @compat sizehint!(beta, N+1)
     op = operator(eq, t)
     push!(beta,0.)
     for i=2:N
+        println(i)
         w = op*v[i]
+        println(w)
+        println("alpha",alpha)
         push!(alpha, w'*v[i])
         w = w-alpha[i-1]*v[i]-beta[i-1]*v[i-1]
         push!(beta, norm(w))
@@ -111,8 +114,7 @@ function propagate(prob::QuKrylov, eq::QuEquation, t, current_t, current_qustate
     for j=1:N
         next_state = next_state + v[j]*U_k[j,1]
     end
-    CQST = QuBase.similar_type(current_qustate)
-    return CQST(reshape(coeffs(next_state), dims), bases(current_qustate))
+    return reshape(next_state, dims)
 end
 
 export QuEuler,

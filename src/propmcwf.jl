@@ -37,15 +37,16 @@ Ensemble of state, number of trajectories, decomposition based on the state.
 
   Decomposition is of state `rho` if `rho` is a `QuBase.AbstractQuMatrix`.
 """ ->
-type QuMCWFEnsemble{QA<:QuBase.AbstractQuArray}
+type QuMCWFEnsemble{QA<:Union{AbstractVector, AbstractMatrix, SparseVector, SparseMatrixCSC}}
     rho::QA
     ntraj::Int
     decomp
     QuMCWFEnsemble(rho, ntraj, decomp) = new(rho, ntraj, decomp)
 end
 
-QuMCWFEnsemble{QM<:QuBase.AbstractQuMatrix}(rho::QM, ntraj=500) = QuMCWFEnsemble{QM}(rho, ntraj, eigfact(full(coeffs(rho))))
-QuMCWFEnsemble{QV<:QuBase.AbstractQuVector}(psi::QV, ntraj=500) = QuMCWFEnsemble{QV}(psi, ntraj, nothing)
+QuMCWFEnsemble{QM<:Union{AbstractMatrix, SparseMatrixCSC}}(rho::QM, ntraj=500) = QuMCWFEnsemble{QM}(rho, ntraj, eigfact(full(rho)))
+QuMCWFEnsemble{QV<:AbstractVector}(psi::QV, ntraj=500) = QuMCWFEnsemble{QV}(psi, ntraj, nothing)
+QuMCWFEnsemble{QV<:SparseVector}(psi::QV, ntraj=500) = QuMCWFEnsemble{QV}(SparseMatrixCSC(psi), ntraj, nothing)
 
 Base.length(en::QuMCWFEnsemble) = en.ntraj
 
@@ -117,7 +118,7 @@ Inputs :
 Output :
 * QuArray with eigen vector from decomposition passed as an argument.
 """ ->
-function draw{QM<:QuBase.AbstractQuMatrix}(mcwfensemble::QuMCWFEnsemble{QM})
+function draw{QM<:Union{AbstractMatrix, SparseMatrixCSC}}(mcwfensemble::QuMCWFEnsemble{QM})
     r = rand() # draw random number from [0,1)
     pacc = 0.
     for i=1:length(mcwfensemble.decomp[:values])
@@ -141,11 +142,11 @@ Inputs :
 Output :
 * Copy of the QuVector.
 """ ->
-function draw{QV<:QuBase.AbstractQuVector}(mcwfensemble::QuMCWFEnsemble{QV})
+function draw{QV<:Union{AbstractVector, SparseVector}}(mcwfensemble::QuMCWFEnsemble{QV})
     return copy(mcwfensemble.rho)
 end
 
-function propagate(prob::QuMCWF, eq::QuLindbladMasterEq, t_end, t_start, psi)
+function propagate(prob::QuMCWF, eq::Union{QuLindbladMasterEq, QuLindbladMasterEqSparse}, t_end, t_start, psi)
     const jtol = 1.e-6  # jump tolerance
     # get information of QME
     heff = eff_hamiltonian(eq)
@@ -189,6 +190,10 @@ function propagate(prob::QuMCWF, eq::QuLindbladMasterEq, t_end, t_start, psi)
     end
     return psi
 end
+
+propagate(prob::QuMCWF, eq::QuLindbladMasterEq, t_end, t_start, psi::AbstractVector) = propagae(prob, eq, t_end, t_start, psi)
+
+propagate(prob::QuMCWF, eq::QuLindbladMasterEqSparse, t_end, t_start, psi::SparseVector) = propagate(prob, eq, t_end, t_start, SparseMatrixCSC(psi))
 
 export QuMCWFEnsemble,
       QuMCWF
