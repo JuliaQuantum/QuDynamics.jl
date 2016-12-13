@@ -27,7 +27,7 @@ Inputs :
 Output :
 * QuPropagator construct depending on the input.
 """ ->
-immutable QuStateEvolution{QPM<:QuPropagatorMethod, QVM<:@compat(Union{QuBase.AbstractQuVector,QuBase.AbstractQuMatrix}), QE<:QuEquation}
+immutable QuStateEvolution{QPM<:QuPropagatorMethod, QVM<:@compat(Union{AbstractVector, AbstractMatrix, SparseVector, SparseMatrixCSC}), QE<:QuEquation}
     eq::QE
     init_state::QVM
     tlist
@@ -35,24 +35,57 @@ immutable QuStateEvolution{QPM<:QuPropagatorMethod, QVM<:@compat(Union{QuBase.Ab
     QuStateEvolution(eq, init_state, tlist, method) = new(eq, init_state, tlist, method)
 end
 
-QuStateEvolution{QPM<:QuPropagatorMethod, QV<:QuBase.AbstractQuVector, QE<: QuEquation}(eq::QE, init_state::QV, tlist, method::QPM) = QuStateEvolution{QPM,QV,QE}(eq, init_state, tlist, method)
+# QuStateEvolution{QPM<:QuPropagatorMethod, QV<:QuBase.AbstractQuVector, QE<: QuEquation}(eq::QE, init_state::QV, tlist, method::QPM) = QuStateEvolution{QPM,QV,QE}(eq, init_state, tlist, method)
 
-QuStateEvolution{QPM<:QuPropagatorMethod, QM<:QuBase.AbstractQuMatrix, QE<: QuEquation}(eq::QE, init_state::QM, tlist, method::QPM) = QuStateEvolution{QPM,QM,QE}(eq, init_state, tlist, method)
+QuStateEvolution{QPM<:QuPropagatorMethod, QV<:Union{AbstractVector, SparseVector}, QE<: QuEquation}(eq::QE, init_state::QV, tlist, method::QPM) = QuStateEvolution{QPM,QV,QE}(eq, init_state, tlist, method)
 
-QuStateEvolution{QPM<:QuPropagatorMethod, QV<:QuBase.AbstractQuVector}(eq::QuSchrodingerEq, init_state::QV, tlist, method::QPM) = QuStateEvolution{QPM,QV,QuSchrodingerEq}(eq, init_state, tlist, method)
+# QuStateEvolution{QPM<:QuPropagatorMethod, QM<:QuBase.AbstractQuMatrix, QE<: QuEquation}(eq::QE, init_state::QM, tlist, method::QPM) = QuStateEvolution{QPM,QM,QE}(eq, init_state, tlist, method)
 
-QuStateEvolution{QPM<:QuPropagatorMethod, QV<:QuBase.AbstractQuVector}(hamiltonian::QuBase.AbstractQuMatrix, init_state::QV,  tlist, method::QPM) = QuStateEvolution{QPM,QV,QuSchrodingerEq}(QuSchrodingerEq(hamiltonian),init_state, tlist, method)
+QuStateEvolution{QPM<:QuPropagatorMethod, QM<:Union{AbstractMatrix, SparseMatrixCSC}, QE<: QuEquation}(eq::QE, init_state::QM, tlist, method::QPM) = QuStateEvolution{QPM,QM,QE}(eq, init_state, tlist, method)
 
-QuStateEvolution{QPM<:QuPropagatorMethod, QM<:QuBase.AbstractQuMatrix}(eq::QuLiouvillevonNeumannEq, init_state::QM, tlist, method::QPM) = QuStateEvolution{QPM,QM,QuLiouvillevonNeumannEq}(eq, init_state, tlist, method)
+# QuStateEvolution{QPM<:QuPropagatorMethod, QV<:QuBase.AbstractQuVector}(eq::QuSchrodingerEq, init_state::QV, tlist, method::QPM) = QuStateEvolution{QPM,QV,QuSchrodingerEq}(eq, init_state, tlist, method)
 
-QuStateEvolution{QPM<:QuPropagatorMethod, QM<:QuBase.AbstractQuMatrix}(hamiltonian::QuBase.AbstractQuMatrix, init_state::QM,  tlist, method::QPM) = QuStateEvolution{QPM,QM,QuLiouvillevonNeumannEq}(QuLiouvillevonNeumannEq(liouvillian_op(hamiltonian)),init_state, tlist, method)
+QuStateEvolution{QPM<:QuPropagatorMethod, QV<:AbstractVector}(eq::QuSchrodingerEq, init_state::QV, tlist, method::QPM) = QuStateEvolution{QPM,QV,QuSchrodingerEq}(eq, init_state, tlist, method)
 
-QuStateEvolution{QPM<:QuPropagatorMethod, QM<:QuBase.AbstractQuMatrix}(eq::QuLindbladMasterEq, init_state::QM, tlist, method::QPM) = QuStateEvolution{QPM,QM,QuLindbladMasterEq}(eq, init_state, tlist, method)
+QuStateEvolution{QPM<:QuPropagatorMethod, QV<:SparseVector}(eq::QuSchrodingerEqSparse, init_state::QV, tlist, method::QPM) = QuStateEvolution{QPM,QV,QuSchrodingerEqSparse}(eq, SparseMatrixCSC(init_state), tlist, method)
 
-QuStateEvolution{QPM<:QuPropagatorMethod, QM<:QuBase.AbstractQuMatrix, COT<:QuBase.AbstractQuMatrix}(hamiltonian::QuBase.AbstractQuMatrix, collapse_ops::Vector{COT}, init_state::QM, tlist, method::QPM) = QuStateEvolution{QPM,QM,QuLindbladMasterEq}(QuLindbladMasterEq(hamiltonian,collapse_ops), init_state, tlist, method)
+# QuStateEvolution{QPM<:QuPropagatorMethod, QV<:QuBase.AbstractQuVector}(hamiltonian::QuBase.AbstractQuMatrix, init_state::QV,  tlist, method::QPM) = QuStateEvolution{QPM,QV,QuSchrodingerEq}(QuSchrodingerEq(hamiltonian),init_state, tlist, method)
+
+QuStateEvolution{QPM<:QuPropagatorMethod, QV<:AbstractVector}(hamiltonian::AbstractMatrix, init_state::QV,  tlist, method::QPM) = QuStateEvolution{QPM,QV,QuSchrodingerEq}(QuSchrodingerEq(hamiltonian),init_state, tlist, method)
+
+QuStateEvolution{QPM<:QuPropagatorMethod, QV<:SparseVector}(hamiltonian::SparseMatrixCSC, init_state::QV,  tlist, method::QPM) = QuStateEvolution{QPM,QV,QuSchrodingerEqSparse}(QuSchrodingerEqSparse(hamiltonian), SparseMatrixCSC(init_state), tlist, method)
+
+# QuStateEvolution{QPM<:QuPropagatorMethod, QM<:QuBase.AbstractQuMatrix}(eq::QuLiouvillevonNeumannEq, init_state::QM, tlist, method::QPM) = QuStateEvolution{QPM,QM,QuLiouvillevonNeumannEq}(eq, init_state, tlist, method)
+
+QuStateEvolution{QPM<:QuPropagatorMethod, QM<:AbstractMatrix}(eq::QuLiouvillevonNeumannEq, init_state::QM, tlist, method::QPM) = QuStateEvolution{QPM,QM,QuLiouvillevonNeumannEq}(eq, init_state, tlist, method)
+
+QuStateEvolution{QPM<:QuPropagatorMethod, QM<:SparseMatrixCSC}(eq::QuLiouvillevonNeumannEqSparse, init_state::QM, tlist, method::QPM) = QuStateEvolution{QPM,QM,QuLiouvillevonNeumannEqSparse}(eq, init_state, tlist, method)
+
+# QuStateEvolution{QPM<:QuPropagatorMethod, QM<:QuBase.AbstractQuMatrix}(hamiltonian::QuBase.AbstractQuMatrix, init_state::QM,  tlist, method::QPM) = QuStateEvolution{QPM,QM,QuLiouvillevonNeumannEq}(QuLiouvillevonNeumannEq(liouvillian_op(hamiltonian)),init_state, tlist, method)
+
+QuStateEvolution{QPM<:QuPropagatorMethod, QM<:AbstractMatrix}(hamiltonian::AbstractMatrix, init_state::QM,  tlist, method::QPM) = QuStateEvolution{QPM,QM,QuLiouvillevonNeumannEq}(QuLiouvillevonNeumannEq(liouvillian_op(hamiltonian)),init_state, tlist, method)
+
+QuStateEvolution{QPM<:QuPropagatorMethod, QM<:SparseMatrixCSC}(hamiltonian::SparseMatrixCSC, init_state::QM,  tlist, method::QPM) = QuStateEvolution{QPM,QM,QuLiouvillevonNeumannEqSparse}(QuLiouvillevonNeumannEqSparse(liouvillian_op(hamiltonian)),init_state, tlist, method)
+
+# QuStateEvolution{QPM<:QuPropagatorMethod, QM<:QuBase.AbstractQuMatrix}(eq::QuLindbladMasterEq, init_state::QM, tlist, method::QPM) = QuStateEvolution{QPM,QM,QuLindbladMasterEq}(eq, init_state, tlist, method)
+
+QuStateEvolution{QPM<:QuPropagatorMethod, QM<:AbstractMatrix}(eq::QuLindbladMasterEq, init_state::QM, tlist, method::QPM) = QuStateEvolution{QPM,QM,QuLindbladMasterEq}(eq, init_state, tlist, method)
+
+QuStateEvolution{QPM<:QuPropagatorMethod, QM<:SparseMatrixCSC}(eq::QuLindbladMasterEqSparse, init_state::QM, tlist, method::QPM) = QuStateEvolution{QPM,QM,QuLindbladMasterEqSparse}(eq, init_state, tlist, method)
+
+
+# QuStateEvolution{QPM<:QuPropagatorMethod, QM<:QuBase.AbstractQuMatrix, COT<:QuBase.AbstractQuMatrix}(hamiltonian::QuBase.AbstractQuMatrix, collapse_ops::Vector{COT}, init_state::QM, tlist, method::QPM) = QuStateEvolution{QPM,QM,QuLindbladMasterEq}(QuLindbladMasterEq(hamiltonian,collapse_ops), init_state, tlist, method)
+
+QuStateEvolution{QPM<:QuPropagatorMethod, QM<:AbstractMatrix, COT<:AbstractMatrix}(hamiltonian::AbstractMatrix, collapse_ops::Vector{COT}, init_state::QM, tlist, method::QPM) = QuStateEvolution{QPM,QM,QuLindbladMasterEq}(QuLindbladMasterEq(hamiltonian,collapse_ops), init_state, tlist, method)
+
+QuStateEvolution{QPM<:QuPropagatorMethod, QM<:SparseMatrixCSC, COT<:SparseMatrixCSC}(hamiltonian::SparseMatrixCSC, collapse_ops::Vector{COT}, init_state::QM, tlist, method::QPM) = QuStateEvolution{QPM,QM,QuLindbladMasterEqSparse}(QuLindbladMasterEqSparse(hamiltonian,collapse_ops), init_state, tlist, method)
 
 # QuLindbladMasterEqUncached is used as the construction of Lindblad operator is not required for every tracjectory.
-QuStateEvolution{QPM<:QuPropagatorMethod, QV<:QuBase.AbstractQuVector, COT<:QuBase.AbstractQuMatrix}(hamiltonian::QuBase.AbstractQuMatrix, collapse_ops::Vector{COT}, init_state::QV, tlist, method::QPM) = QuStateEvolution{QPM,QV,QuLindbladMasterEq}(QuLindbladMasterEqUncached(hamiltonian,collapse_ops), init_state, tlist, method)
+# QuStateEvolution{QPM<:QuPropagatorMethod, QV<:QuBase.AbstractQuVector, COT<:QuBase.AbstractQuMatrix}(hamiltonian::QuBase.AbstractQuMatrix, collapse_ops::Vector{COT}, init_state::QV, tlist, method::QPM) = QuStateEvolution{QPM,QV,QuLindbladMasterEq}(QuLindbladMasterEqUncached(hamiltonian,collapse_ops), init_state, tlist, method)
+
+QuStateEvolution{QPM<:QuPropagatorMethod, QV<:AbstractVector, COT<:AbstractMatrix}(hamiltonian::AbstractMatrix, collapse_ops::Vector{COT}, init_state::QV, tlist, method::QPM) = QuStateEvolution{QPM,QV,QuLindbladMasterEq}(QuLindbladMasterEqUncached(hamiltonian,collapse_ops), init_state, tlist, method)
+
+QuStateEvolution{QPM<:QuPropagatorMethod, QV<:SparseVector, COT<:SparseMatrixCSC}(hamiltonian::SparseMatrixCSC, collapse_ops::Vector{COT}, init_state::QV, tlist, method::QPM) = QuStateEvolution{QPM,QV,QuLindbladMasterEqSparse}(QuLindbladMasterEqUncachedSparse(hamiltonian,collapse_ops), SparseMatrixCSC(init_state), tlist, method)
 
 # QuPropagator and QuStateEvolution types are the same.
 typealias QuPropagator QuStateEvolution
@@ -169,9 +202,13 @@ Inputs :
 Output :
 * Evolved operator.
 """ ->
-QuEvolutionOp{QM<:QuBase.AbstractQuMatrix}(op::QM, dt::Float64) = expm(-im*op*dt)
+QuEvolutionOp{QM<:AbstractMatrix}(op::QM, dt::Float64) = expm(-im*op*dt)
 
-QuEvolutionOp{QM<:QuBase.AbstractQuMatrix}(op::QM, tf::Float64,  ti::Float64) = QuEvolutionOp(op, tf-ti)
+QuEvolutionOp{QM<:SparseMatrixCSC}(op::QM, dt::Float64) = expm(-im*op*dt)
+
+QuEvolutionOp{QM<:AbstractMatrix}(op::QM, tf::Float64,  ti::Float64) = QuEvolutionOp(op, tf-ti)
+
+QuEvolutionOp{QM<:SparseMatrixCSC}(op::QM, tf::Float64,  ti::Float64) = QuEvolutionOp(op, tf-ti)
 
 QuEvolutionOp{QE<:QuEquation}(eq::QE, dt::Float64) = QuEvolutionOp(operator(eq), dt)
 
@@ -182,18 +219,18 @@ function Base.show(io::IO, qprop::QuPropagator)
     println(io, "Summarizing the system :")
     if :lindblad in field_params && :hamiltonian in field_params
         println(io, "Equation type : $(typeof(qprop.eq))")
-        println(io, "Size of the Lindblad operator of the system : $(size(coeffs(qprop.eq.lindblad)))")
-        println(io, "Size of the Hamiltonian of the system : $(size(coeffs(qprop.eq.hamiltonian)))")
+        println(io, "Size of the Lindblad operator of the system : $(size(qprop.eq.lindblad))")
+        println(io, "Size of the Hamiltonian of the system : $(size(qprop.eq.hamiltonian))")
         println(io, "Number of collapse operators : $(length(qprop.eq.collapse_ops))")
-        println(io, "Size of the Density matrix : $(size(coeffs(qprop.init_state)))")
+        println(io, "Size of the Density matrix : $(size(qprop.init_state))")
     elseif :hamiltonian in field_params
         println(io, "Equation type : $(typeof(qprop.eq))")
-        println(io, "Size of the Hamiltonian of the system : $(size(coeffs(qprop.eq.hamiltonian)))")
-        println(io, "Size of the Initial state : $(size(coeffs(qprop.init_state)))")
+        println(io, "Size of the Hamiltonian of the system : $(size(qprop.eq.hamiltonian))")
+        println(io, "Size of the Initial state : $(size(qprop.init_state))")
     elseif :liouvillian in field_params
         println(io, "Equation type : $(typeof(qprop.eq))")
-        println(io, "Size of the Liouvillian of the system : $(size(coeffs(qprop.eq.liouvillian)))")
-        println(io, "Size of the Density matrix : $(size(coeffs(qprop.init_state)))")
+        println(io, "Size of the Liouvillian of the system : $(size(qprop.eq.liouvillian))")
+        println(io, "Size of the Density matrix : $(size(qprop.init_state))")
     end
     println(io, "Time steps used : $(qprop.tlist)")
     println(io, "Solver used : $(qprop.method)")

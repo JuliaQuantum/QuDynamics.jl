@@ -12,7 +12,7 @@ Schrodinger Equation type
 
   Hamiltonian of the system is the only field for the type.
 """ ->
-immutable QuSchrodingerEq{H<:QuBase.AbstractQuMatrix} <: QuEquation{1}
+immutable QuSchrodingerEq{H<:AbstractMatrix} <: QuEquation{1}
     hamiltonian::H
     QuSchrodingerEq(hamiltonian) = new(hamiltonian)
 end
@@ -30,7 +30,14 @@ Inputs :
 Output :
 * QuSchrodingerEq type construct.
 """ ->
-QuSchrodingerEq{H<:QuBase.AbstractQuMatrix}(hamiltonian::H) = QuSchrodingerEq{H}(hamiltonian)
+QuSchrodingerEq{H<:AbstractMatrix}(hamiltonian::H) = QuSchrodingerEq{H}(hamiltonian)
+
+immutable QuSchrodingerEqSparse{H<:SparseMatrixCSC} <: QuEquation{1}
+    hamiltonian::H
+    QuSchrodingerEqSparse(hamiltonian) = new(hamiltonian)
+end
+
+QuSchrodingerEqSparse{H<:SparseMatrixCSC}(hamiltonian::H) = QuSchrodingerEqSparse{H}(hamiltonian)
 
 @doc """
 Liouville von Neumann Equation type
@@ -41,7 +48,7 @@ Liouville von Neumann Equation type
 
   Liouvillian of the system is the only field for the type.
 """ ->
-immutable QuLiouvillevonNeumannEq{H<:QuBase.AbstractQuMatrix} <: QuEquation{1}
+immutable QuLiouvillevonNeumannEq{H<:AbstractMatrix} <: QuEquation{1}
     liouvillian::H
     QuLiouvillevonNeumannEq(liouvillian) = new(liouvillian)
 end
@@ -59,7 +66,14 @@ Inputs :
 Output :
 * QuLiouvillevonNeumannEq type construct.
 """ ->
-QuLiouvillevonNeumannEq{H<:QuBase.AbstractQuMatrix}(liouvillian::H) = QuLiouvillevonNeumannEq{H}(liouvillian)
+QuLiouvillevonNeumannEq{H<:AbstractMatrix}(liouvillian::H) = QuLiouvillevonNeumannEq{H}(liouvillian)
+
+immutable QuLiouvillevonNeumannEqSparse{H<:SparseMatrixCSC} <: QuEquation{1}
+    liouvillian::H
+    QuLiouvillevonNeumannEqSparse(liouvillian) = new(liouvillian)
+end
+
+QuLiouvillevonNeumannEqSparse{H<:SparseMatrixCSC}(liouvillian::H) = QuLiouvillevonNeumannEqSparse{H}(liouvillian)
 
 @doc """
 Lindblad Master Equation type
@@ -78,7 +92,7 @@ Lindblad Master Equation type
 """ ->
 # immutable QuLindbladMasterEq{CF, L<:@compat(Union{QuBase.AbstractQuMatrix, Nothing}), H<:QuBase.AbstractQuMatrix, V<:QuBase.AbstractQuMatrix} <: QuEquation{CF}
 # (Use this for running the benchmarks on version < 0.4)
-immutable QuLindbladMasterEq{CF, L<:@compat(Union{QuBase.AbstractQuMatrix, Void}), H<:QuBase.AbstractQuMatrix, V<:QuBase.AbstractQuMatrix} <: QuEquation{CF}
+immutable QuLindbladMasterEq{CF, L<:Union{AbstractMatrix, Void}, H<:AbstractMatrix, V<:AbstractMatrix} <: QuEquation{CF}
     lindblad::L
     hamiltonian::H
     collapse_ops::Vector{V}
@@ -102,7 +116,7 @@ Inputs :
 Output :
 * QuLindbladMasterEq type construct.
 """ ->
-function QuLindbladMasterEq{H<:QuBase.AbstractQuMatrix, V<:QuBase.AbstractQuMatrix}(hamiltonian::H, collapse_ops::Vector{V})
+function QuLindbladMasterEq{H<:AbstractMatrix, V<:AbstractMatrix}(hamiltonian::H, collapse_ops::Vector{V})
     lop = lindblad_op(hamiltonian, collapse_ops)
     QuLindbladMasterEq{1,typeof(lop),H,V}(lop, hamiltonian, collapse_ops)
 end
@@ -126,8 +140,25 @@ Output :
 * QuLindbladMasterEq type construct.
 """ ->
 # QuLindbladMasterEq{0,Nothing,H,V}(nothing, hamiltonian, collapse_ops) (Use this for running the benchmarks on version < 0.4)
-function QuLindbladMasterEqUncached{H<:QuBase.AbstractQuMatrix, V<:QuBase.AbstractQuMatrix}(hamiltonian::H, collapse_ops::Vector{V})
+function QuLindbladMasterEqUncached{H<:AbstractMatrix, V<:AbstractMatrix}(hamiltonian::H, collapse_ops::Vector{V})
     QuLindbladMasterEq{0,Void,H,V}(nothing, hamiltonian, collapse_ops)
+end
+
+immutable QuLindbladMasterEqSparse{CF, L<:Union{SparseMatrixCSC, Void}, H<:SparseMatrixCSC, V<:SparseMatrixCSC} <: QuEquation{CF}
+    lindblad::L
+    hamiltonian::H
+    collapse_ops::Vector{V}
+    QuLindbladMasterEqSparse(lindblad, hamiltonian, collapse_ops) = new(lindblad, hamiltonian, collapse_ops)
+end
+
+function QuLindbladMasterEqSparse{H<:SparseMatrixCSC, V<:SparseMatrixCSC}(hamiltonian::H, collapse_ops::Vector{V})
+    lop = lindblad_op(hamiltonian, collapse_ops)
+    QuLindbladMasterEqSparse{1,typeof(lop),H,V}(lop, hamiltonian, collapse_ops)
+end
+
+# QuLindbladMasterEq{0,Nothing,H,V}(nothing, hamiltonian, collapse_ops) (Use this for running the benchmarks on version < 0.4)
+function QuLindbladMasterEqUncachedSparse{H<:SparseMatrixCSC, V<:SparseMatrixCSC}(hamiltonian::H, collapse_ops::Vector{V})
+    QuLindbladMasterEqSparse{0,Void,H,V}(nothing, hamiltonian, collapse_ops)
 end
 
 @doc """
@@ -146,12 +177,12 @@ Inputs :
 Output :
 * Lindblad operator.
 """ ->
-function lindblad_op(hamiltonian::QuBase.AbstractQuMatrix, collapse_ops::Vector)
-    nb = size(coeffs(hamiltonian), 1)
+function lindblad_op(hamiltonian::Union{AbstractMatrix, SparseMatrixCSC}, collapse_ops::Vector)
+    nb = size(hamiltonian, 1)
     nlop = length(collapse_ops)
-    heff = zeros(typeof(im*one(eltype(hamiltonian))), size(coeffs(hamiltonian)))
+    heff = zeros(typeof(im*one(eltype(hamiltonian))), size(hamiltonian))
     for l=1:nlop
-        heff = heff + 0.5*coeffs(collapse_ops[l])'*coeffs(collapse_ops[l])
+        heff = heff + 0.5*collapse_ops[l]'*collapse_ops[l]
     end
     SI = Array(Int,0)
     SJ = Array(Int,0)
@@ -181,7 +212,7 @@ function lindblad_op(hamiltonian::QuBase.AbstractQuMatrix, collapse_ops::Vector)
             end
         end
     end
-    return QuBase.similar_type(hamiltonian)(sparse(SI, SJ, Lvals, nb*nb, nb*nb))
+    return sparse(SI, SJ, Lvals, nb*nb, nb*nb)
 end
 
 @doc """
@@ -197,7 +228,7 @@ Inputs :
 Output :
 * Liouvillian operator.
 """ ->
-liouvillian_op(hamiltonian::QuBase.AbstractQuMatrix) = lindblad_op(hamiltonian, [])
+liouvillian_op(hamiltonian::Union{AbstractMatrix, SparseMatrixCSC}) = lindblad_op(hamiltonian, [])
 
 @doc """
 Liouvillian of the QuLiouvillevonNeumannEq type.
@@ -215,7 +246,7 @@ Inputs :
 Output :
 * Liouvillian of the system
 """ ->
-function operator(qu_eq::QuLiouvillevonNeumannEq, t=0)
+function operator(qu_eq::Union{QuLiouvillevonNeumannEq, QuLiouvillevonNeumannEqSparse}, t=0)
     return qu_eq.liouvillian
 end
 
@@ -235,7 +266,7 @@ Inputs :
 Output :
 * Hamiltonian of the system
 """ ->
-function operator(qu_eq::QuSchrodingerEq, t=0)
+function operator(qu_eq::Union{QuSchrodingerEq, QuSchrodingerEqSparse}, t=0)
     return qu_eq.hamiltonian
 end
 
@@ -256,7 +287,7 @@ Inputs :
 Output :
 * Lindblad operator of the system
 """ ->
-function operator(qu_eq::QuLindbladMasterEq{1}, t=0)
+function operator(qu_eq::Union{QuLindbladMasterEq{1}, QuLindbladMasterEqSparse{1}}, t=0)
     return qu_eq.lindblad
 end
 
@@ -277,7 +308,7 @@ Inputs :
 Output :
 * Lindblad operator of the system
 """ ->
-function operator(qu_eq::QuLindbladMasterEq{0}, t=0)
+function operator(qu_eq::Union{QuLindbladMasterEq{0}, QuLindbladMasterEqSparse{0}}, t=0)
     return lindblad_op(qu_eq.hamiltonian, qu_eq.collapse_ops)
 end
 
@@ -292,7 +323,7 @@ Inputs :
 Output
 * Effective hamiltonian of the system
 """ ->
-function eff_hamiltonian(lme::QuLindbladMasterEq)
+function eff_hamiltonian(lme::Union{QuLindbladMasterEq, QuLindbladMasterEqSparse})
     heff = lme.hamiltonian
     for c_ops in lme.collapse_ops
        heff = heff - im*0.5*c_ops'*c_ops
@@ -302,6 +333,10 @@ end
 
 export QuEquation,
       QuSchrodingerEq,
+      QuSchrodingerEqSparse,
       QuLiouvillevonNeumannEq,
+      QuLiouvillevonNeumannEqSparse,
       QuLindbladMasterEq,
-      QuLindbladMasterEqUncached
+      QuLindbladMasterEqSparse,
+      QuLindbladMasterEqUncached,
+      QuLindbladMasterEqUncachedSparse

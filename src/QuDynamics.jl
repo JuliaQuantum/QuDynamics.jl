@@ -1,5 +1,5 @@
 module QuDynamics
-    using QuBase
+    # using QuBase
     using Compat
     using ODE
     using Expokit
@@ -11,10 +11,10 @@ module QuDynamics
     include("propodesolvers.jl")
     include("propexpmsolvers.jl")
     include("propmcwf.jl")
-    module QuTiP
-    using ..QuBase
-    using ..QuDynamics
-    include("qutipinterface.jl")
-    end
+    # module QuTiP
+    # using ..QuBase
+    # using ..QuDynamics
+    # include("qutipinterface.jl")
+    # end
     export propagate
 end
