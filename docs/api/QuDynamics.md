@@ -113,13 +113,13 @@ Step Propagation using the Crank Nicolson formula.
 *source:*
 [QuDynamics.jl/src/propstepsolvers.jl:13](https://github.com/JuliaQuantum/QuDynamics.jl/tree/becd9775c09c354e88049381321f944b6c7c5760/src/propstepsolvers.jl#L13)
 
----
 
 <a id="type__queuler.1" class="lexicon_definition"></a>
 #### QuEuler [¶](#type__queuler.1)
 Euler method
 
 Step Propagation using the Euler formula.
+$ket{psi(t_{k+1})} = (mathbb{I}-iHartriangle{t})ket{psi(t_{k})}$
 
 
 *source:*
@@ -163,7 +163,6 @@ keys as `:m` and `:tol`.
 *source:*
 [QuDynamics.jl/src/propexpmsolvers.jl:14](https://github.com/JuliaQuantum/QuDynamics.jl/tree/becd9775c09c354e88049381321f944b6c7c5760/src/propexpmsolvers.jl#L14)
 
----
 
 <a id="type__qukrylov.1" class="lexicon_definition"></a>
 #### QuKrylov [¶](#type__qukrylov.1)
@@ -263,7 +262,6 @@ Ensemble of state, number of trajectories, decomposition based on the state.
 *source:*
 [QuDynamics.jl/src/propmcwf.jl:39](https://github.com/JuliaQuantum/QuDynamics.jl/tree/becd9775c09c354e88049381321f944b6c7c5760/src/propmcwf.jl#L39)
 
----
 
 <a id="type__quode23s.1" class="lexicon_definition"></a>
 #### QuODE23s [¶](#type__quode23s.1)
@@ -400,7 +398,6 @@ Schrodinger Equation type
 
 ## Internal
 
----
 
 <a id="method__done.1" class="lexicon_definition"></a>
 #### done(mcwfensemble::QuMCWFEnsemble{QA<:AbstractQuArray{B<:AbstractBasis{S<:AbstractStructure}, T, N}}, i::Int64) [¶](#method__done.1)
@@ -546,7 +543,6 @@ Output :
 *source:*
 [QuDynamics.jl/src/quequations.jl:170](https://github.com/JuliaQuantum/QuDynamics.jl/tree/becd9775c09c354e88049381321f944b6c7c5760/src/quequations.jl#L170)
 
----
 
 <a id="method__next.1" class="lexicon_definition"></a>
 #### next(mcwfensemble::QuMCWFEnsemble{QA<:AbstractQuArray{B<:AbstractBasis{S<:AbstractStructure}, T, N}}, i::Int64) [¶](#method__next.1)
@@ -568,7 +564,6 @@ Output :
 *source:*
 [QuDynamics.jl/src/propmcwf.jl:81](https://github.com/JuliaQuantum/QuDynamics.jl/tree/becd9775c09c354e88049381321f944b6c7c5760/src/propmcwf.jl#L81)
 
----
 
 <a id="method__next.2" class="lexicon_definition"></a>
 #### next{QPM<:QuPropagatorMethod}(prob::QuPropagator{QPM<:QuPropagatorMethod, QVM<:Union(AbstractQuArray{B<:AbstractBasis{S<:AbstractStructure}, T, 2}, AbstractQuArray{B<:AbstractBasis{S<:AbstractStructure}, T, 1}), QE<:QuEquation}, qustate::QuPropagatorState) [¶](#method__next.2)
@@ -654,7 +649,6 @@ Output :
 *source:*
 [QuDynamics.jl/src/quequations.jl:202](https://github.com/JuliaQuantum/QuDynamics.jl/tree/becd9775c09c354e88049381321f944b6c7c5760/src/quequations.jl#L202)
 
----
 
 <a id="method__start.1" class="lexicon_definition"></a>
 #### start(mcwfensemble::QuMCWFEnsemble{QA<:AbstractQuArray{B<:AbstractBasis{S<:AbstractStructure}, T, N}}) [¶](#method__start.1)
